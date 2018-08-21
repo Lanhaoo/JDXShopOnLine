@@ -21,9 +21,9 @@ class HomePageBanner: NSObject,HandyJSON {
     //获取广告页
    public func fetchBannerData(complectedCallback:@escaping (_ result : Array<HomePageBanner>) -> ()){
         var banners:Array<HomePageBanner> = Array<HomePageBanner>()
-        JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"1"], finishedCallback: { (result) in
-            if let actualData = result.data as? Array<Any>{
-                for item in actualData{
+        JDXNetService.startRequest(url: JDXApiDefine.recommented, params: ["sPosition":"1"], finishedCallback: { (result) in
+            if let actualData = result.data{
+                for item in actualData as! Array<Any>{
                     if let object = HomePageBanner.deserialize(from: item as? Dictionary){
                         banners.append(object)
                     }

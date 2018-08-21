@@ -6,3 +6,5 @@
 #import <MJRefresh/MJRefresh.h>
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "YYFPSLabel.h"
+#import "UINavigationBar+Gradient.h"
+#import <YYModel/YYModel.h>

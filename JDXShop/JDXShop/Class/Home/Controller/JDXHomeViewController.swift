@@ -10,63 +10,59 @@ import UIKit
 
 class JDXHomeViewController: JDXBaseCollectionViewController {
     let productModel = JDXHomePageProductInfo()
-//    let fpsLabel:YYFPSLabel = {
-//        var label = YYFPSLabel.init(frame: CGRect.init(x: 10, y: 10, width: 60, height: 30))
-//        return label
-//    }()
+    var emptyView : QMUIEmptyView?
     override func loadView() {
         super.loadView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.barTintColor = UIColor.qmui_color(withHexString: "#ffe53a")
+//        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.qmui_color(withHexString: "#ffe53a"))
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.scrollViewDidScroll(self.collectionView!)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "首页"
         self.collectionView?.backgroundColor = UIColor.qmui_color(withHexString: "#f5f5f5")
         //注册表头
         self.collectionView?.register(HomePageBannerView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "HomePageBannerView")
         self.collectionView?.register(JDXLimitSaleView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXLimitSaleView")
         self.collectionView?.register(JDXKindMenuView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXKindMenuView")
+        self.collectionView?.register(JDXBrandView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXBrandView")
         self.collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "UICollectionReusableView")
         loadData()
-        self.collectionView?.addHeaderRefresh {
-          
-        }
-        self.collectionView?.addFooterRefresh {
-            
-        }
-        
-    }
-    override func jdx_addSubViews() {
-//        let window = UIApplication.shared.keyWindow
-//        window?.addSubview(self.fpsLabel)
     }
     override func configCell() {
         self.reuseIdentifier = "JDXHomePageProductCell"
         self.collectionView?.register(JDXHomePageProductCell.self, forCellWithReuseIdentifier: self.reuseIdentifier)
     }
     override func loadData() {
-        productModel.loadProductData(page: self.collectionView!.currentPage, pageSize: self.collectionView!.pageSize, complectedCallback: { (result) in
+        productModel.loadProductData(page: self.page, pageSize: self.pageSize, complectedCallback: { (result) in
             for item in result{
                 self.dataRecords?.append(item)
             }
             self.collectionView?.reloadData()
         }) {
-        
+
         }
     }
+    override func getCellData(indexPath: NSIndexPath) -> AnyObject {
+        return self.dataRecords![indexPath.row] as AnyObject
+    }
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 5
     }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 3 {
+        if section == 4 {
             return (self.dataRecords?.count)!
         }
         return 0
     }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let  cell:JDXBaseCollectionViewCell? = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? JDXBaseCollectionViewCell
-        if  let actual = cell {
-            actual.setCellData(data: getCellData(indexPath: indexPath as NSIndexPath) as AnyObject)
-        }
-        return cell!
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cellItem = super.getCellData(indexPath: indexPath as NSIndexPath)
+        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.plain)
+        self.navigationController?.pushViewController(detailPage, animated: true)
     }
     //设置显示头视图
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -83,6 +79,10 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
             let kindMenuView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXKindMenuView", for: indexPath)
             return kindMenuView
         }
+        if indexPath.section == 3 {
+            let brandView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXBrandView", for: indexPath)
+            return brandView
+        }
         headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "UICollectionReusableView", for: indexPath)
         return headerView!
     }
@@ -93,10 +93,13 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
             size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 189.0))
         }
         if section == 1 {
-            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 253.0))
+            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 254.0))
         }
         if section == 2 {
             size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 206.0))
+        }
+        if section == 3{
+            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 290.0))
         }
         return size
     }
@@ -113,5 +116,18 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return scaleHeight(height: 1.0)
     }
+    
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let y = scrollView.contentOffset.y
+//        print(y)
+//        let color = UIColor.qmui_color(withHexString: "#ffe53a")
+//        if y > 64 {
+//            let alpha = min(1, 1 - ((64+64-y)/64))
+//            print(alpha)
+//            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.withAlphaComponent(alpha))
+//        }else{
+//            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.withAlphaComponent(0))
+//        }
+//    }
     
 }
