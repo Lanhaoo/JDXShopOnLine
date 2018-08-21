@@ -16,4 +16,5 @@ target 'JDXShop' do
     pod 'Kingfisher'
     pod 'Reachability'
     pod 'YYModel'
+    pod 'JSONModel'
 end

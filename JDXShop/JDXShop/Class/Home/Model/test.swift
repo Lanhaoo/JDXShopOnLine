@@ -8,7 +8,7 @@
 
 import UIKit
 
-class test: NSObject {
+class test: JSONModel {
     var Num:String?
     var rADChinese:String?
     var rADEnglish:String?

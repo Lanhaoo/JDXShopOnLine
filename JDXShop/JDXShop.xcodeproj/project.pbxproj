@@ -27,6 +27,7 @@
 		A0825FD0212C33A800E08B0F /* JDXTableNetServiceProtocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0825FCF212C33A800E08B0F /* JDXTableNetServiceProtocal.swift */; };
 		A0F5D1ED212C4ECD00A9643B /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5D1EC212C4ECD00A9643B /* test.swift */; };
 		A0F5D1EF212C62EF00A9643B /* JDXTableParseDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5D1EE212C62EF00A9643B /* JDXTableParseDataService.swift */; };
+		A0F5D1F1212C6D2E00A9643B /* JDXBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5D1F0212C6D2E00A9643B /* JDXBaseModel.swift */; };
 		B362B5E6454E20540E729965 /* Pods_JDXShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75DC5284D1ED29CEE545D20 /* Pods_JDXShop.framework */; };
 		DE8A55702127C2BE004797D2 /* JDXHomePageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A556F2127C2BE004797D2 /* JDXHomePageProductCell.swift */; };
 		DE8A5577212AC536004797D2 /* JDXLimitSaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5576212AC535004797D2 /* JDXLimitSaleView.swift */; };
@@ -75,6 +76,7 @@
 		A0825FCF212C33A800E08B0F /* JDXTableNetServiceProtocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTableNetServiceProtocal.swift; sourceTree = "<group>"; };
 		A0F5D1EC212C4ECD00A9643B /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		A0F5D1EE212C62EF00A9643B /* JDXTableParseDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTableParseDataService.swift; sourceTree = "<group>"; };
+		A0F5D1F0212C6D2E00A9643B /* JDXBaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXBaseModel.swift; sourceTree = "<group>"; };
 		B75DC5284D1ED29CEE545D20 /* Pods_JDXShop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDXShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE8A556F2127C2BE004797D2 /* JDXHomePageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXHomePageProductCell.swift; sourceTree = "<group>"; };
 		DE8A5576212AC535004797D2 /* JDXLimitSaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXLimitSaleView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				A0825FB8212C304500E08B0F /* JDXBaseView.swift */,
 				A0825FB9212C304500E08B0F /* JDXBaseTableViewCell.swift */,
 				A0825FBA212C304500E08B0F /* JDXBaseTableViewController.swift */,
+				A0F5D1F0212C6D2E00A9643B /* JDXBaseModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
@@ -447,6 +451,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
@@ -471,6 +476,7 @@
 				A0825FD0212C33A800E08B0F /* JDXTableNetServiceProtocal.swift in Sources */,
 				DE9AF89A2122B0570062D172 /* JDXHomeViewController.swift in Sources */,
 				A0825FBE212C304500E08B0F /* UINavigationBar+Gradient.m in Sources */,
+				A0F5D1F1212C6D2E00A9643B /* JDXBaseModel.swift in Sources */,
 				A0825FBF212C304500E08B0F /* YYWeakProxy.m in Sources */,
 				A0825FC1212C304500E08B0F /* JDXDefine.swift in Sources */,
 				A0825FC7212C304500E08B0F /* JDXBaseCollectionViewController.swift in Sources */,

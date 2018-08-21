@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.7.2)
   - DZNEmptyDataSet (1.8.1)
   - HandyJSON (4.1.1)
+  - JSONModel (1.7.0)
   - Kingfisher (4.8.0)
   - MJRefresh (3.1.15.3)
   - QMUIKit (2.7.1):
@@ -269,6 +270,7 @@ DEPENDENCIES:
   - Alamofire
   - DZNEmptyDataSet
   - HandyJSON (~> 4.1.1)
+  - JSONModel
   - Kingfisher
   - MJRefresh
   - QMUIKit
@@ -282,6 +284,7 @@ SPEC REPOS:
     - Alamofire
     - DZNEmptyDataSet
     - HandyJSON
+    - JSONModel
     - Kingfisher
     - MJRefresh
     - QMUIKit
@@ -295,6 +298,7 @@ SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   HandyJSON: 3a3de917c4118767ffe41c29b5acba23409649f4
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   QMUIKit: 9c9737c570c89aef3d3d163de4d5d9c8e5c49e99
@@ -304,6 +308,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 001d12c508eff0c639b3d7bc557fc3177ac02000
+PODFILE CHECKSUM: b32ae6e84ea681f79c5f85e0b97475446c337ae5
 
 COCOAPODS: 1.5.0

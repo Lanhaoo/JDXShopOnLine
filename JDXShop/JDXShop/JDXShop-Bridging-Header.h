@@ -8,3 +8,4 @@
 #import "YYFPSLabel.h"
 #import "UINavigationBar+Gradient.h"
 #import <YYModel/YYModel.h>
+#import <JSONModel/JSONModel.h>
