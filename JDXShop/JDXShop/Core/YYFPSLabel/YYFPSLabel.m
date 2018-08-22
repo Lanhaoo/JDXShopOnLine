@@ -80,7 +80,7 @@
     
     NSString *text1 = [NSString stringWithFormat:@"%d FPS",(int)round(fps)];
     
-    NSLog(@"%@\n%@", text1,[self getCurrentVC]);
+//    NSLog(@"%@\n%@", text1,[self getCurrentVC]);
 
     
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d FPS",(int)round(fps)]];

@@ -16,6 +16,8 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.tabBarController?.tabBar.isTranslucent = false
         self.navigationController?.navigationBar.barTintColor = UIColor.qmui_color(withHexString: "#ffe53a")
 //        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.qmui_color(withHexString: "#ffe53a"))
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -61,7 +63,7 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        let cellItem = super.getCellData(indexPath: indexPath as NSIndexPath)
-        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.plain)
+        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.grouped)
         self.navigationController?.pushViewController(detailPage, animated: true)
     }
     //设置显示头视图
