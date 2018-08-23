@@ -16,7 +16,7 @@ class JDXBrandView: UICollectionReusableView {
         jdx_addSubViews()
     }
     func jdx_addSubViews() {
-        let topView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleHeight(height: 44.0)))
+        let topView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleWidth(width: 44.0)))
         topView.backgroundColor = UIColor.white
         self.addSubview(topView)
         let labelChinese = UILabel()
@@ -38,13 +38,13 @@ class JDXBrandView: UICollectionReusableView {
             make.centerY.equalToSuperview()
         }
         
-        gridView.frame = CGRect.init(x: 0, y:topView.frame.size.height+scaleHeight(height: 1.0), width: kScreen_Width, height: scaleHeight(height: 188.0))
+        gridView.frame = CGRect.init(x: 0, y:topView.frame.size.height+scaleWidth(width: 1.0), width: kScreen_Width, height: scaleWidth(width: 188.0))
         gridView.columnCount = 4
     
         gridView.separatorWidth = scaleWidth(width: 1.0)
         gridView.separatorColor = UIColor.qmui_color(withHexString: "#f5f5f5")
         
-        gridView.rowHeight = scaleHeight(height: 94.0)
+        gridView.rowHeight = scaleWidth(width: 94.0)
         gridView.backgroundColor = UIColor.white
         self.addSubview(gridView)
         
@@ -68,12 +68,12 @@ class JDXBrandView: UICollectionReusableView {
         self.addSubview(bottomView)
         bottomView.backgroundColor = UIColor.white
         bottomView.snp.makeConstraints { (make) in
-            make.top.equalTo(gridView.snp.bottom).offset(scaleHeight(height: 1.0))
+            make.top.equalTo(gridView.snp.bottom).offset(scaleWidth(width: 1.0))
             make.left.equalTo(0)
             make.width.equalTo(kScreen_Width)
-            make.height.equalTo(scaleHeight(height: 56.0))
+            make.height.equalTo(scaleWidth(width: 56.0))
         }
-        let labelContainerView = UIView.init(frame: CGRect.init(x: 0, y: scaleHeight(height: 10.0), width: kScreen_Width, height: scaleHeight(height: 46.0)))
+        let labelContainerView = UIView.init(frame: CGRect.init(x: 0, y: scaleWidth(width: 10.0), width: kScreen_Width, height: scaleWidth(width: 46.0)))
         labelContainerView.backgroundColor = UIColor.qmui_color(withHexString: "#ffe53a")
         bottomView.addSubview(labelContainerView)
 
@@ -84,9 +84,9 @@ class JDXBrandView: UICollectionReusableView {
         label1.textAlignment = NSTextAlignment.center
         labelContainerView.addSubview(label1)
         label1.snp.makeConstraints { (make) in
-            make.top.equalTo(scaleHeight(height: 10.0))
+            make.top.equalTo(scaleWidth(width: 10.0))
             make.width.equalTo(kScreen_Width)
-            make.height.equalTo(scaleHeight(height: 15.0))
+            make.height.equalTo(scaleWidth(width: 15.0))
         }
     
         let label2 = UILabel()
@@ -97,9 +97,9 @@ class JDXBrandView: UICollectionReusableView {
         labelContainerView.addSubview(label2)
         
         label2.snp.makeConstraints { (make) in
-            make.top.equalTo(label1.snp.bottom).offset(scaleHeight(height: 4.0))
+            make.top.equalTo(label1.snp.bottom).offset(scaleWidth(width: 4.0))
             make.width.equalTo(kScreen_Width)
-            make.height.equalTo(scaleHeight(height: 10.0))
+            make.height.equalTo(scaleWidth(width: 10.0))
         }
         
     }

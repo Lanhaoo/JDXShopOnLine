@@ -26,6 +26,7 @@ class JDXTableParseDataService<T:HandyJSON> : JDXTableNetService {
             }
         }else{
             if let actualData = data{
+                print(actualData)
                 if let object = T.deserialize(from: actualData as? Dictionary){
                     if let actualDelegate = self.delegate{
                         actualDelegate.requestSuccess(result: object as AnyObject)

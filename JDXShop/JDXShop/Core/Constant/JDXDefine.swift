@@ -12,6 +12,7 @@ import UIKit
 import Foundation
 import Alamofire
 let kScreen_Width = UIScreen.main.bounds.size.width
+/// iphonex 812
 let kScreen_Height = UIScreen.main.bounds.size.height
 //按照6的尺寸 进行缩放
 //缩放后的宽度

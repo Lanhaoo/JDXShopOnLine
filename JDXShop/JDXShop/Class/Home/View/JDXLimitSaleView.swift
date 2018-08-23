@@ -27,9 +27,9 @@ class JDXLimitSaleView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     func jdx_addSubViews() {
-        gridView.frame = CGRect.init(x: 0, y:0, width: kScreen_Width, height: scaleHeight(height: 253.0))
+        gridView.frame = CGRect.init(x: 0, y:0, width: kScreen_Width, height: scaleWidth(width: 253.0))
         gridView.columnCount = 2
-        gridView.rowHeight = scaleHeight(height: 253.0)
+        gridView.rowHeight = scaleWidth(width: 253.0)
         gridView.backgroundColor = UIColor.white
         
         gridView.separatorWidth = scaleWidth(width: 1.0)
@@ -127,8 +127,8 @@ class JDXLimitItemView: JDXBaseView {
     func makeConstraints() {
         self.titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(scaleWidth(width: 12.0))
-            make.top.equalTo(scaleHeight(height: 20.0))
-            make.height.equalTo(scaleHeight(height: 16.0))
+            make.top.equalTo(scaleWidth(width: 20.0))
+            make.height.equalTo(scaleWidth(width: 16.0))
         }
         self.rightMoreIocn.snp.makeConstraints { (make) in
             make.right.equalTo(-scaleWidth(width: 10.0))
@@ -137,27 +137,27 @@ class JDXLimitItemView: JDXBaseView {
         }
         self.subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.titleLabel)
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(scaleHeight(height: 9.0))
-            make.height.equalTo(scaleHeight(height: 9.0))
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(scaleWidth(width: 9.0))
+            make.height.equalTo(scaleWidth(width: 13.0))
         }
         self.productImageView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.subTitleLabel.snp.bottom).offset(scaleHeight(height: 2.0))
+            make.top.equalTo(self.subTitleLabel.snp.bottom).offset(scaleWidth(width: 2.0))
             make.width.height.equalTo(scaleWidth(width: 133.0))
         }
         self.countDownLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.productImageView.snp.bottom).offset(-scaleHeight(height: 10.0))
+            make.top.equalTo(self.productImageView.snp.bottom).offset(-scaleWidth(width: 10.0))
             make.height.equalTo(scaleWidth(width: 19.0))
         }
         self.priceLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.countDownLabel.snp.bottom).offset(scaleHeight(height: 7.0))
-            make.height.equalTo(scaleWidth(width: 12.0))
+            make.top.equalTo(self.countDownLabel.snp.bottom).offset(scaleWidth(width: 7.0))
+            make.height.equalTo(scaleWidth(width: 13.0))
         }
         self.productNameLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.priceLabel.snp.bottom).offset(scaleHeight(height: 8.0))
+            make.top.equalTo(self.priceLabel.snp.bottom).offset(scaleWidth(width: 8.0))
             make.height.equalTo(scaleWidth(width: 13.0))
         }
     }

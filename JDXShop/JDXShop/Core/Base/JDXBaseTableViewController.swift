@@ -179,6 +179,7 @@ class JDXBaseTableViewController: JDXBaseViewController,UITableViewDataSource,UI
             hideRefresh()
         }
     }
+    
 }
 extension JDXBaseTableViewController{
     
@@ -191,12 +192,10 @@ extension JDXBaseTableViewController{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:JDXBaseTableViewCell? = nil
         cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier) as? JDXBaseTableViewCell
-        if let actualCell = cell {
-            actualCell.setCellData(data: self.getCurrentRowData(index: indexPath as NSIndexPath))
-        }else{
-           cell = self.createTableViewCell()
-           cell?.setCellData(data: self.getCurrentRowData(index: indexPath as NSIndexPath))
+        if cell == nil{
+            cell = self.createTableViewCell()
         }
+        cell?.setCellData(data: self.getCurrentRowData(index: indexPath as NSIndexPath))
         return cell!
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

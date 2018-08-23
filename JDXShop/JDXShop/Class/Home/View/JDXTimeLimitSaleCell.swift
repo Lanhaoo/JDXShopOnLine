@@ -21,9 +21,11 @@ class JDXTimeLimitSaleCell: JDXBaseTableViewCell {
         self.addSubview(productImageView)
         
         productTitleLabel = UILabel()
+        productTitleLabel.numberOfLines = 1
         self.addSubview(productTitleLabel)
         
         descLabel = UILabel()
+        descLabel.numberOfLines = 2
         self.addSubview(descLabel)
         
         salePriceLabel = UILabel()
@@ -51,7 +53,6 @@ class JDXTimeLimitSaleCell: JDXBaseTableViewCell {
     func makeConstraints(){
         self.productImageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(scaleWidth(width: 120.0))
-            make.top.equalTo(scaleHeight(height: 6.0))
             make.left.equalTo(scaleWidth(width: 10.0))
             make.bottom.equalToSuperview()
         }
@@ -59,33 +60,30 @@ class JDXTimeLimitSaleCell: JDXBaseTableViewCell {
         self.productTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.productImageView.snp.right).offset(scaleWidth(width: 10.0))
             make.right.equalTo(-scaleWidth(width: 10.0))
-            make.top.equalTo(scaleHeight(height: 17.0))
+            make.top.equalTo(scaleWidth(width: 17.0))
             make.height.equalTo(scaleWidth(width: 13.0))
         }
         
         self.descLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.productTitleLabel)
-            make.top.equalTo(self.productTitleLabel.snp.bottom).offset(-scaleHeight(height: 8.0))
+            make.top.equalTo(self.productTitleLabel.snp.bottom).offset(-scaleWidth(width: 8.0))
             make.right.equalTo(self.productTitleLabel)
-            make.height.equalTo(scaleWidth(width: 28.0))
         }
     
         self.saleBtn.snp.makeConstraints { (make) in
             make.right.equalTo(self.productTitleLabel)
             make.width.equalTo(scaleWidth(width: 80.0))
-            make.height.equalTo(scaleHeight(height: 38.0))
-            make.bottom.equalTo(-scaleHeight(height: 8.0))
+            make.height.equalTo(scaleWidth(width: 38.0))
+            make.bottom.equalTo(-scaleWidth(width: 8.0))
         }
         
         self.salePriceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.productTitleLabel)
-            make.height.equalTo(scaleHeight(height: 16.0))
-            make.top.equalTo(self.descLabel.snp.bottom).offset(scaleHeight(height: 22.0))
+            make.top.equalTo(self.descLabel.snp.bottom).offset(scaleWidth(width: 22.0))
         }
         self.oldPriceLabel.snp.makeConstraints { (make) in
             make.left.equalTo(self.productTitleLabel)
-            make.height.equalTo(scaleHeight(height: 12.0))
-            make.top.equalTo(self.salePriceLabel.snp.bottom).offset(scaleHeight(height: 7.0))
+            make.top.equalTo(self.salePriceLabel.snp.bottom).offset(scaleWidth(width: 7.0))
         }
     }
 

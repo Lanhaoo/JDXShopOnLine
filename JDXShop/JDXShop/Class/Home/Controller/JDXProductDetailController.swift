@@ -27,7 +27,4 @@ class JDXProductDetailController: JDXBaseTableViewController {
                                     params: ["sPosition":6,"iPageNo":1,"iPagePer":10],
                                   delegate: self)
     }
-    deinit {
-        print("释放了")
-    }
 }

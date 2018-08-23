@@ -20,7 +20,7 @@ class JDXKindMenuView: UICollectionReusableView {
     }
     
     func jdx_addSubViews() {
-        let topView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleHeight(height: 27.0)))
+        let topView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleWidth(width: 27.0)))
         topView.backgroundColor = UIColor.white
         self.addSubview(topView)
         
@@ -46,9 +46,9 @@ class JDXKindMenuView: UICollectionReusableView {
             make.centerY.equalToSuperview()
         }
         
-        gridView.frame = CGRect.init(x: 0, y:topView.frame.size.height+scaleHeight(height: 1.0), width: kScreen_Width, height: scaleHeight(height: 165.0))
+        gridView.frame = CGRect.init(x: 0, y:topView.frame.size.height+scaleHeight(height: 1.0), width: kScreen_Width, height: scaleWidth(width: 165.0))
         gridView.columnCount = 4
-        gridView.rowHeight = scaleHeight(height: 80.0)
+        gridView.rowHeight = scaleWidth(width: 80.0)
         gridView.backgroundColor = UIColor.white
         self.addSubview(gridView)
         
@@ -64,9 +64,9 @@ class JDXKindMenuView: UICollectionReusableView {
                 btnBGView.addSubview(topImageView)
                 topImageView.snp.makeConstraints({ (make) in
                     make.width.equalTo(scaleWidth(width: 48.0))
-                    make.height.equalTo(scaleHeight(height: 48.0))
+                    make.height.equalTo(scaleWidth(width: 48.0))
                     make.centerX.equalToSuperview()
-                    make.top.equalTo(scaleHeight(height: 5.0))
+                    make.top.equalTo(scaleWidth(width: 5.0))
                 })
                 
                 let bottomLabel = UILabel()
@@ -75,9 +75,9 @@ class JDXKindMenuView: UICollectionReusableView {
                 bottomLabel.text = item.rTitle
                 btnBGView.addSubview(bottomLabel)
                 bottomLabel.snp.makeConstraints({ (make) in
-                    make.top.equalTo(topImageView.snp.bottom).offset(scaleHeight(height: 7.0))
+                    make.top.equalTo(topImageView.snp.bottom).offset(scaleWidth(width: 7.0))
                     make.centerX.equalToSuperview()
-                    make.height.equalTo(scaleHeight(height: 13.0))
+                    make.height.equalTo(scaleWidth(width: 13.0))
                 })
             }
         }) {

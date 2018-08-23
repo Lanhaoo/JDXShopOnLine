@@ -103,23 +103,23 @@ extension JDXHomeViewController{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         var size : CGSize = CGSize.init(width: 0, height: 0)
         if section == 0 {
-            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 189.0))
+            size = CGSize.init(width: kScreen_Width, height: scaleWidth(width: 189.0))
         }
         if section == 1 {
-            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 254.0))
+            size = CGSize.init(width: kScreen_Width, height: scaleWidth(width: 254.0))
         }
         if section == 2 {
-            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 206.0))
+            size = CGSize.init(width: kScreen_Width, height: scaleWidth(width: 206))
         }
         if section == 3{
-            size = CGSize.init(width: kScreen_Width, height: scaleHeight(height: 290.0))
+            size = CGSize.init(width: kScreen_Width, height: scaleWidth(width: 290.0))
         }
         return size
     }
     
     //定义每个item的大小
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize.init(width: scaleWidth(width:187.0), height: scaleHeight(height:245.0))
+        return CGSize.init(width: scaleWidth(width:187.0), height: scaleWidth(width:245.0))
     }
     //定义item之间的水平间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -127,6 +127,6 @@ extension JDXHomeViewController{
     }
     //定义item之间的垂直间距
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return scaleHeight(height: 1.0)
+        return scaleWidth(width: 1.0)
     }
 }
