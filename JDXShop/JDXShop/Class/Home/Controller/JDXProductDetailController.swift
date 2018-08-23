@@ -11,11 +11,23 @@ import UIKit
 class JDXProductDetailController: JDXBaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadData()
+        loadDataWithEmptyLoadingView()
         self.reuseIdentifier = "JDXBaseTableViewCell"
+        weak var weakSelf = self
+        self.tableView?.addHeaderRefresh {
+            weakSelf?.loadData()
+        }
+        self.tableView?.addFooterRefresh {
+            weakSelf?.loadMoreData()
+        }
     }
     override func initNetService() {
         self.NetService = JDXTableParseDataService<JDXBaseModel>()
-        self.NetService?.createService(url: JDXApiDefine.recommendPageGet, params: ["sPosition":2,"iPageNo":1,"iPagePer":10], delegate: self)
+        self.NetService?.configService(url:JDXApiDefine.recommendPageGet,
+                                    params: ["sPosition":6,"iPageNo":1,"iPagePer":10],
+                                  delegate: self)
+    }
+    deinit {
+        print("释放了")
     }
 }

@@ -35,6 +35,9 @@
 		DE8A5584212C0574004797D2 /* JDXProductDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5583212C0574004797D2 /* JDXProductDetailController.swift */; };
 		DE8A558B212D06D1004797D2 /* JDXBaseTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A558A212D06D1004797D2 /* JDXBaseTransitioning.swift */; };
 		DE8A558D212D0CED004797D2 /* JDXTabbarTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A558C212D0CED004797D2 /* JDXTabbarTransitioning.swift */; };
+		DE8A5592212EA62B004797D2 /* JDXTimeLimitSaleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5591212EA62B004797D2 /* JDXTimeLimitSaleController.swift */; };
+		DE8A5594212EB2AF004797D2 /* JDXTimeLimitInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */; };
+		DE8A5596212EB606004797D2 /* JDXTimeLimitSaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */; };
 		DE9AF8942122AAF80062D172 /* JDXTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF8932122AAF80062D172 /* JDXTabbarController.swift */; };
 		DE9AF89A2122B0570062D172 /* JDXHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF8992122B0570062D172 /* JDXHomeViewController.swift */; };
 		DE9AF89C2122B0660062D172 /* JDXCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF89B2122B0660062D172 /* JDXCategoryViewController.swift */; };
@@ -85,6 +88,9 @@
 		DE8A5583212C0574004797D2 /* JDXProductDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXProductDetailController.swift; sourceTree = "<group>"; };
 		DE8A558A212D06D1004797D2 /* JDXBaseTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXBaseTransitioning.swift; sourceTree = "<group>"; };
 		DE8A558C212D0CED004797D2 /* JDXTabbarTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTabbarTransitioning.swift; sourceTree = "<group>"; };
+		DE8A5591212EA62B004797D2 /* JDXTimeLimitSaleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitSaleController.swift; sourceTree = "<group>"; };
+		DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitInfo.swift; sourceTree = "<group>"; };
+		DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitSaleCell.swift; sourceTree = "<group>"; };
 		DE9AF8932122AAF80062D172 /* JDXTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTabbarController.swift; sourceTree = "<group>"; };
 		DE9AF8992122B0570062D172 /* JDXHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXHomeViewController.swift; sourceTree = "<group>"; };
 		DE9AF89B2122B0660062D172 /* JDXCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXCategoryViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 			children = (
 				DE9AF8B82122D0640062D172 /* HomePageBanner.swift */,
 				DE9AF8BD2125861B0062D172 /* JDXHomePageProductInfo.swift */,
+				DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,6 +301,7 @@
 				DE8A5576212AC535004797D2 /* JDXLimitSaleView.swift */,
 				DE8A5578212AC9F9004797D2 /* JDXKindMenuView.swift */,
 				DE8A557D212BBFAB004797D2 /* JDXBrandView.swift */,
+				DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +311,7 @@
 			children = (
 				DE9AF8992122B0570062D172 /* JDXHomeViewController.swift */,
 				DE8A5583212C0574004797D2 /* JDXProductDetailController.swift */,
+				DE8A5591212EA62B004797D2 /* JDXTimeLimitSaleController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -480,6 +489,7 @@
 				A0F5D220212DA9D700A9643B /* JDXBaseView.swift in Sources */,
 				A0F5D21B212DA9D700A9643B /* JDXBaseModel.swift in Sources */,
 				A0F5D211212DA9D700A9643B /* JDXUIButtonUtil.swift in Sources */,
+				DE8A5592212EA62B004797D2 /* JDXTimeLimitSaleController.swift in Sources */,
 				A0F5D216212DA9D700A9643B /* JDXTableNetService.swift in Sources */,
 				A0F5D219212DA9D700A9643B /* JDXNetService.swift in Sources */,
 				DE9AF89A2122B0570062D172 /* JDXHomeViewController.swift in Sources */,
@@ -493,6 +503,7 @@
 				A0F5D21D212DA9D700A9643B /* JDXBaseViewController.swift in Sources */,
 				DE9AF89C2122B0660062D172 /* JDXCategoryViewController.swift in Sources */,
 				A0F5D21F212DA9D700A9643B /* JDXBaseCollectionViewController.swift in Sources */,
+				DE8A5596212EB606004797D2 /* JDXTimeLimitSaleCell.swift in Sources */,
 				DE9AF8B72122CFBB0062D172 /* HomePageBannerView.swift in Sources */,
 				DE9EF4922122A4D500DAFCB1 /* AppDelegate.swift in Sources */,
 				A0F5D21A212DA9D700A9643B /* JDXApiDefine.swift in Sources */,
@@ -509,6 +520,7 @@
 				DE9AF8A22122B0910062D172 /* JDXProfileViewController.swift in Sources */,
 				A0F5D221212DA9D700A9643B /* JDXBaseTableViewCell.swift in Sources */,
 				A0F5D215212DA9D700A9643B /* JDXDefine.swift in Sources */,
+				DE8A5594212EB2AF004797D2 /* JDXTimeLimitInfo.swift in Sources */,
 				DE8A558D212D0CED004797D2 /* JDXTabbarTransitioning.swift in Sources */,
 				A0F5D212212DA9D700A9643B /* UINavigationBar+Gradient.m in Sources */,
 				A0F5D222212DA9D700A9643B /* JDXBaseTableViewController.swift in Sources */,

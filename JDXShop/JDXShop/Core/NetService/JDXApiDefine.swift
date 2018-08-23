@@ -18,4 +18,6 @@ class JDXApiDefine: NSObject {
     
     public static let productSearchKind = "JDXProductSearchKindGetO"
     
+    public static let productSearchKindGet = "JDXProductSearchKindGetO"
+    
 }

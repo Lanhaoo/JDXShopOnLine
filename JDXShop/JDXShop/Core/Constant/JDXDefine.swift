@@ -27,9 +27,11 @@ let netServiceHeaders:HTTPHeaders = [
     "DBKey":"88cb975bfe4b850ffb759f47f3e856f2",
     "Token":"pnj7P5AXGPDXNMBH7dGZv2EgkTgj9mX2"
 ]
-//显示网络图片的方法
-//func showImage(url:String?){
-//    if let actualUrl = url{
-//        
-//    }
-//}
+//默认的店铺编号
+let defaultShopNum = 100001
+//导航栏的高度
+let navigationBarHeight = UINavigationController().navigationBar.frame.size.height
+//工具栏的高度
+let tabbarHeight = UITabBarController().tabBar.frame.size.height
+//状态栏的高度
+let statusBarHeight = UIApplication.shared.statusBarFrame.size.height

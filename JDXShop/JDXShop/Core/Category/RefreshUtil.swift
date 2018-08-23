@@ -33,7 +33,7 @@ extension UIScrollView{
         }
     }
     public func addHeaderRefresh(complectedCallback:@escaping () -> ()){
-        let header = MJRefreshStateHeader.init(refreshingBlock: complectedCallback)
+        let header = MJRefreshNormalHeader.init(refreshingBlock: complectedCallback)
         header?.setTitle("下拉即可刷新", for: MJRefreshState.idle)
         header?.setTitle("松开即可刷新", for: MJRefreshState.pulling)
         header?.setTitle("玩儿命加载中", for: MJRefreshState.refreshing)

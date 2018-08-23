@@ -7,6 +7,8 @@
 //
 /*
  专门处理表格网络数据请求
+ 只用于表格数据请求
+ 提供了四个回调方法 通知表格 显示不同的空白提示页
  */
 import Foundation
 import Alamofire
@@ -15,13 +17,17 @@ public class JDXTableNetService:NSObject{
     var delegate:JDXTableNetServiceProtocal?
     var requestUrl:String?
     var params:[String:Any]?
-    internal func createService(url:String,
+    
+    /// 配置请求参数
+    internal func configService(url:String,
                            params:[String:Any],
                            delegate:JDXTableNetServiceProtocal){
         self.requestUrl = url
         self.params = params
         self.delegate = delegate
     }
+    
+    /// 执行请求 外界执行该函数之前，必须先执行上面的函数，配置必要的参数
     func startExcute() {
         if self.getNetWorksStatus(){
             Alamofire.request(checkUrl(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: netServiceHeaders).responseData { (response) in
@@ -64,9 +70,9 @@ public class JDXTableNetService:NSObject{
     ///
     /// - Parameter data: 返回数据集
     func fetchDataSuccess(data:AnyObject?) {
-        if let actualData = data as? Array<Any>{
+        if let actualData = data{
             if let actualDelegate = self.delegate{
-                actualDelegate.requestSuccess(result: actualData as Array<AnyObject>)
+                actualDelegate.requestSuccess(result: actualData)
             }
         }
     }

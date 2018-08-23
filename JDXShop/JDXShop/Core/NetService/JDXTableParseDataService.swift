@@ -7,9 +7,8 @@
 //
 
 import UIKit
-
-class JDXTableParseDataService<T:JSONModel> : JDXTableNetService {
-    
+import HandyJSON
+class JDXTableParseDataService<T:HandyJSON> : JDXTableNetService {
     /// 自动解析成模型
     ///
     /// - Parameter data: 返回解析成功的模型数组
@@ -17,21 +16,21 @@ class JDXTableParseDataService<T:JSONModel> : JDXTableNetService {
         // 自动解析数据
         if let actualData = data as? Array<Any>{
             var dataRecords:Array<Any> = Array<Any>()
-           
-            do{
-                dataRecords = try T.arrayOfModels(fromDictionaries: actualData, error:()) as! Array<Any>
-            }catch(_){
-                
+            for item in actualData{
+                if let object = T.deserialize(from: item as? Dictionary){
+                    dataRecords.append(object)
+                }
             }
-           
-            
-//            for item in actualData{
-//                if let object =  T.arrayOfModels(fromDictionaries: item as! [Any], error: ()){
-//                    dataRecords.append(object)
-//                }
-//            }
             if let actualDelegate = self.delegate{
-                actualDelegate.requestSuccess(result: dataRecords as Array<AnyObject>)
+                actualDelegate.requestSuccess(result: dataRecords as AnyObject)
+            }
+        }else{
+            if let actualData = data{
+                if let object = T.deserialize(from: actualData as? Dictionary){
+                    if let actualDelegate = self.delegate{
+                        actualDelegate.requestSuccess(result: object as AnyObject)
+                    }
+                }
             }
         }
     }

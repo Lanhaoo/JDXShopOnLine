@@ -15,7 +15,6 @@ class JDXBaseCollectionViewController: UICollectionViewController,UICollectionVi
     lazy var dataRecords : Array<Any>? = Array<Any>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.automaticallyAdjustsScrollViewInsets = false
         self.collectionView?.showsVerticalScrollIndicator = false
         self.collectionView?.backgroundColor = UIColor.white
         jdx_addSubViews()

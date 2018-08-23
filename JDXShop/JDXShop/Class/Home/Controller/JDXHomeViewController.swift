@@ -8,17 +8,14 @@
 
 import UIKit
 
-class JDXHomeViewController: JDXBaseCollectionViewController {
+class JDXHomeViewController: JDXBaseCollectionViewController,JDXLimitSaleViewProtocol {
     let productModel = JDXHomePageProductInfo()
-    var emptyView : QMUIEmptyView?
     override func loadView() {
         super.loadView()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.tabBarController?.tabBar.isTranslucent = false
-        self.navigationController?.navigationBar.barTintColor = UIColor.qmui_color(withHexString: "#ffe53a")
+//        self.navigationController?.navigationBar.barTintColor = UIColor.qmui_color(withHexString: "#ffe53a")
 //        self.navigationController?.navigationBar.lt_setBackgroundColor(UIColor.qmui_color(withHexString: "#ffe53a"))
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
 //        self.scrollViewDidScroll(self.collectionView!)
@@ -52,6 +49,19 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
     override func getCellData(indexPath: NSIndexPath) -> AnyObject {
         return self.dataRecords![indexPath.row] as AnyObject
     }
+}
+
+// MARK: - 实现自定义代理的分类
+extension JDXHomeViewController{
+    func handleSelectedTimeLimitItem() {
+        let timeLimitSalePage = JDXTimeLimitSaleController.init(style: UITableViewStyle.plain)
+        self.navigationController?.pushViewController(timeLimitSalePage, animated: true)
+    }
+    func handleSelectedInternalItem() {
+        
+    }
+}
+extension JDXHomeViewController{
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 5
     }
@@ -62,8 +72,8 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
         return 0
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cellItem = super.getCellData(indexPath: indexPath as NSIndexPath)
-        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.grouped)
+        //        let cellItem = super.getCellData(indexPath: indexPath as NSIndexPath)
+        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.plain)
         self.navigationController?.pushViewController(detailPage, animated: true)
     }
     //设置显示头视图
@@ -74,7 +84,8 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
             return banner
         }
         if indexPath.section == 1 {
-            let limitSaleView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXLimitSaleView", for: indexPath)
+            let limitSaleView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "JDXLimitSaleView", for: indexPath) as! JDXLimitSaleView
+            limitSaleView.delegate = self
             return limitSaleView
         }
         if indexPath.section == 2 {
@@ -118,18 +129,4 @@ class JDXHomeViewController: JDXBaseCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return scaleHeight(height: 1.0)
     }
-    
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let y = scrollView.contentOffset.y
-//        print(y)
-//        let color = UIColor.qmui_color(withHexString: "#ffe53a")
-//        if y > 64 {
-//            let alpha = min(1, 1 - ((64+64-y)/64))
-//            print(alpha)
-//            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.withAlphaComponent(alpha))
-//        }else{
-//            self.navigationController?.navigationBar.lt_setBackgroundColor(color?.withAlphaComponent(0))
-//        }
-//    }
-    
 }

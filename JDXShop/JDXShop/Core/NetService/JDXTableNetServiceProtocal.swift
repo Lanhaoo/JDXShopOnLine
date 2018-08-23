@@ -10,7 +10,7 @@ import Foundation
 
 protocol JDXTableNetServiceProtocal {
     //请求成功 返回数据集
-    func requestSuccess(result:Array<AnyObject>?)
+    func requestSuccess(result:AnyObject?)
     //请求失败
     func requestFail(errorMsg:String?)
     //网络未连接

@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol JDXLimitSaleViewProtocol {
+    func handleSelectedTimeLimitItem()
+    func handleSelectedInternalItem()
+}
+
 class JDXLimitSaleView: UICollectionReusableView {
     let gridView = QMUIGridView()
     let productModel = JDXHomePageProductInfo()
     let timeLimitItemSaleView = JDXLimitItemView()
     let internalLimitItemSaleView = JDXLimitItemView()
+    var delegate:JDXLimitSaleViewProtocol?
     override init(frame: CGRect) {
         super.init(frame: frame)
         jdx_addSubViews()
@@ -38,6 +44,9 @@ class JDXLimitSaleView: UICollectionReusableView {
             for item in result{
                 self.timeLimitItemSaleView.updateUI(data: item)
             }
+            //添加手势
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedTimeLimitView))
+            self.timeLimitItemSaleView.addGestureRecognizer(tap)
         }) {
             
         }
@@ -46,11 +55,24 @@ class JDXLimitSaleView: UICollectionReusableView {
             for item in result{
                 self.internalLimitItemSaleView.updateUI(data: item)
             }
+            //添加手势
+            let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedInterNalView))
+            self.internalLimitItemSaleView.addGestureRecognizer(tap)
         }) {
             
         }
     }
     
+    @objc func selectedTimeLimitView() {
+        if let actualDelegate = self.delegate{
+            actualDelegate.handleSelectedTimeLimitItem()
+        }
+    }
+    @objc func selectedInterNalView() {
+        if let actualDelegate = self.delegate{
+            actualDelegate.handleSelectedInternalItem()
+        }
+    }
 }
 class JDXLimitItemView: JDXBaseView {
     lazy var titleLabel:UILabel = {

@@ -16,24 +16,14 @@ class JDXBaseTableViewCell: UITableViewCell {
     func jdx_addSubViews() {
         
     }
-    
     public func setCellData(data:AnyObject?) {
-        if let actualData = data {
-            print(actualData)
+        if let actualData = data as? JDXBaseModel {
+            print(actualData.rADTitle)
+            self.textLabel?.text = actualData.rADTitle
         }
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }

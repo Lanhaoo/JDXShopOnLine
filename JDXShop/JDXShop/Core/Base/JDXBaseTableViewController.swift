@@ -8,17 +8,24 @@
 /*
  表格基础类
  */
+/// 当前表格获取数据的方式
+enum TABLE_CURRENTLOADDATA_ACTION{
+    case normal   ///常规
+    case loadData ///下拉刷新
+    case loadMoreData /// 上拉刷新
+}
 import UIKit
-
 class JDXBaseTableViewController: JDXBaseViewController,UITableViewDataSource,UITableViewDelegate,JDXTableNetServiceProtocal{
     var NetService:JDXTableNetService?
-    var reuseIdentifier:String!
+    var reuseIdentifier:String! //cell的重用标识符 页面初始化的时候 必须设置
     var tableView:UITableView?
     var style:UITableViewStyle?
-    var currentPage:Int! = 1
-    var pageSize:Int! = 10
-    var dataRecords:Array<Any> = Array<Any>()
+    var currentPage:Int = 1
+    var pageSize:Int = 10
+    var dataRecords:Array<Any> = Array<Any>() //数据集
+    var loadDataAction:TABLE_CURRENTLOADDATA_ACTION? /// 当前表格获取数据的方式
     deinit {
+        print("释放了")
         self.tableView?.delegate = nil
         self.tableView?.dataSource = nil
         if #available(iOS 11, *) {
@@ -57,40 +64,49 @@ class JDXBaseTableViewController: JDXBaseViewController,UITableViewDataSource,UI
         }
     }
     override func viewDidLoad() {
-        super.viewDidLoad()
         initTableView()
-    }
-    private func requestData() {
-        initNetService()
-        if let service = self.NetService{
-            service.startExcute()
-        }
+        super.viewDidLoad()
     }
     /// 子类必须实现的方法！！！！！
     func initNetService() {
         
     }
-    ///页面初始化 或者 页面下拉时 推荐手动 掉用此方法
-    func loadData() {
+    /// 获取数据时 显示loadingView
+    func loadDataWithEmptyLoadingView() {
+        self.loadDataAction = TABLE_CURRENTLOADDATA_ACTION.normal
+        //先显示loading
         self.showEmptyViewWithLoading()
-        clearData()
+        currentPage = 1
         requestData()
     }
-    /// 页面上拉时 推荐手动 掉用此方法
+    /// 列表需要重新加载数据或者下拉的时候 调用此方法
+    func loadData() {
+        self.loadDataAction = TABLE_CURRENTLOADDATA_ACTION.loadData
+        requestData()
+    }
+    /// 列表需要加载更多数据的时候 调用此方法 常用于上拉刷新
     func loadMoreData(){
+        self.loadDataAction = TABLE_CURRENTLOADDATA_ACTION.loadMoreData
         requestData()
     }
+    /// 清空列表数据的方法
     func clearData() {
         NetService = nil
         currentPage = 1
         self.dataRecords.removeAll()
         self.tableView?.reloadData()
     }
-    //重写 列表数据为空的情况 的按钮 点击事件
-    override func tableDataReload() {
-        self.showEmptyViewWithLoading()
+    /// 列表请求数据的基础方法
+    private func requestData() {
+        //请求之前先初始化 NetService对象，通过NetService对象 发起网络请求
+        //当前子类必须重写 initNetService()函数
+        initNetService()
+        //程序在这里崩溃，说明当前子类没有重写initNetService()函数，或者没能正确的初始化 NetService对象
+        assert(NetService != nil, "请先重写initNetService()函数初始化NetService")
+        if let service = self.NetService{
+            service.startExcute()
+        }
     }
-    
     override func viewDidLayoutSubviews() {
         layoutTableView()
         layoutEmptyView()
@@ -101,8 +117,71 @@ class JDXBaseTableViewController: JDXBaseViewController,UITableViewDataSource,UI
             self.tableView?.frame = self.view.bounds
         }
     }
+    
+    
+    
+    /// 请求成功
+    func requestSuccess(result:AnyObject?) {
+        endRefreshing()
+        self.hideEmptyView()
+        showRefresh()
+        NetService = nil
+        if let actualArray = result as? Array<AnyObject> {
+            if let action = self.loadDataAction{
+                switch action {
+                case .normal:
+                    clearData()
+                    self.dataRecords = actualArray
+                    break
+                case .loadData:
+                    clearData()
+                    self.dataRecords = actualArray
+                    break
+                case .loadMoreData:
+                    self.dataRecords = self.dataRecords+actualArray
+                    break
+                }
+            }
+            self.tableView?.reloadData()
+            self.currentPage += 1
+        }
+    }
+    /// 请求失败
+    func requestFail(errorMsg: String?) {
+        endRefreshing()
+        NetService = nil
+        if self.dataRecords.count<=0 {
+            //当页面没有数据的时候 显示 空数据提示页
+            self.showNODataEmptyView()
+            //隐藏刷新控件
+            hideRefresh()
+        }
+    }
+    /// 网络未连接
+    func interNetFail() {
+        //提示没有网络连接
+        QMUITips.showError("网络未连接", in: self.view, hideAfterDelay: 2.0)
+        endRefreshing()
+        NetService = nil
+        if self.dataRecords.count<=0 {
+            self.showInterNetFailEmptyView()
+            //隐藏刷新控件
+            hideRefresh()
+        }
+    }
+    /// 连接服务器失败
+    func serviceLinkFail() {
+        endRefreshing()
+        QMUITips.showError("连接服务器失败", in: self.view, hideAfterDelay: 2.0)
+        NetService = nil
+        if self.dataRecords.count<=0 {
+            self.showLinkServiceFailEmptyView()
+            hideRefresh()
+        }
+    }
 }
 extension JDXBaseTableViewController{
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -113,13 +192,20 @@ extension JDXBaseTableViewController{
         var cell:JDXBaseTableViewCell? = nil
         cell = tableView.dequeueReusableCell(withIdentifier: self.reuseIdentifier) as? JDXBaseTableViewCell
         if let actualCell = cell {
-            actualCell.setCellData(data: self.getCellData(index: indexPath as NSIndexPath))
+            actualCell.setCellData(data: self.getCurrentRowData(index: indexPath as NSIndexPath))
         }else{
            cell = self.createTableViewCell()
+           cell?.setCellData(data: self.getCurrentRowData(index: indexPath as NSIndexPath))
         }
         return cell!
     }
-    func getCellData(index:NSIndexPath) -> AnyObject? {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+  
+    }
+    
+    /// 获取当前行的数据
+    func getCurrentRowData(index:NSIndexPath) -> AnyObject? {
         if index.row<self.dataRecords.count{
             return self.dataRecords[index.row] as AnyObject
         }
@@ -140,32 +226,46 @@ extension JDXBaseTableViewController{
     }
 }
 
+// MARK: - 网络请求回调 统一处理 不同的状态下 显示不同的提示页 当前子类可以根据具体的需求重写以下函数
 extension JDXBaseTableViewController{
-    func requestSuccess(result: Array<AnyObject>?) {
-        self.hideEmptyView()
-        NetService = nil
-        if let actualArray = result {
-            print(actualArray)
-           self.dataRecords = self.dataRecords+actualArray
-            self.tableView?.reloadData()
+    /// 停止刷新 在此函数里面重置刷新控件的状态
+    func endRefreshing() {
+        if let header = self.tableView?.mj_header {
+            header.endRefreshing()
+        }
+        if let footer = self.tableView?.mj_footer {
+            footer.endRefreshing()
         }
     }
     
-    func requestFail(errorMsg: String?) {
-        NetService = nil
-        self.showEmptyView(text: "请求失败")
+    /// 隐藏刷新控件
+    func hideRefresh() {
+        if let header = self.tableView?.mj_header{
+            header.isHidden = true
+        }
+        if let footer = self.tableView?.mj_footer{
+            footer.isHidden = true
+        }
     }
     
-    func interNetFail() {
-        NetService = nil
-        self.showEmptyView(text: "网络未连接")
+    /// 显示刷新控件
+    func showRefresh() {
+        if let header = self.tableView?.mj_header{
+            header.isHidden = false
+        }
+        if let footer = self.tableView?.mj_footer{
+            footer.isHidden = false
+        }
     }
-    
-    func serviceLinkFail() {
-        NetService = nil
-         self.showEmptyView(text: "未能连接到服务器")
+    override func emptyDataAction() {
+        loadDataWithEmptyLoadingView()
     }
-    
+    override func linkServiceFailAction() {
+        loadDataWithEmptyLoadingView()
+    }
+    override func interNetFailAction() {
+        loadDataWithEmptyLoadingView()
+    }
 }
 // MARK: - 重写空视图
 extension JDXBaseTableViewController{
