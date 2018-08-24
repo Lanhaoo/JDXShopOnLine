@@ -8,23 +8,62 @@
 
 import UIKit
 
-class JDXProductDetailController: JDXBaseTableViewController {
+class JDXProductDetailController: JDXBaseViewController {
+    var productDetailInfo:JDXProductDetailInfo!
+    var goodsNum:String? // 商品编号
+    /// 底部的滚动图
+    var bottomScrollView:UIScrollView?
+    //商品详情
+   var goodsInfoView:JDXGoodsInfoContainerView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadDataWithEmptyLoadingView()
-        self.reuseIdentifier = "JDXBaseTableViewCell"
-        weak var weakSelf = self
-        self.tableView?.addHeaderRefresh {
-            weakSelf?.loadData()
-        }
-        self.tableView?.addFooterRefresh {
-            weakSelf?.loadMoreData()
-        }
     }
-    override func initNetService() {
-        self.NetService = JDXTableParseDataService<JDXBaseModel>()
-        self.NetService?.configService(url:JDXApiDefine.recommendPageGet,
-                                    params: ["sPosition":6,"iPageNo":1,"iPagePer":10],
-                                  delegate: self)
+    override func jdx_addSubViews() {
+        self.view.backgroundColor = UIColor.cyan
+        self.view.addSubview(UIView())
+        self.bottomScrollView = UIScrollView.init(frame: self.view.bounds)
+        self.bottomScrollView?.isPagingEnabled = true
+        self.bottomScrollView?.bounces = false
+        self.view.addSubview(self.bottomScrollView!)
+        self.bottomScrollView!.contentSize = CGSize.init(width: kScreen_Width * 3, height: 0)
+        
+        self.goodsInfoView = JDXGoodsInfoContainerView.init(frame: CGRect.init(x: 0, y: 0, width: self.bottomScrollView!.frame.size.width, height: self.bottomScrollView!.frame.size.height))
+        self.bottomScrollView?.addSubview(self.goodsInfoView!)
+        
+        //解决 滚动图 向下偏移的bug
+        if #available(iOS 11.0, *) {
+            self.bottomScrollView?.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+            self.goodsInfoView?.bottomScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
+        } else {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+        
+        if let num = self.goodsNum {
+            self.goodsInfoView!.goodsNum = num
+//            let hud = MBProgressHUD.init(view: self.view)
+//            self.view.addSubview(hud)
+//            hud.label.text = "加载中"
+//            hud.mode = MBProgressHUDMode.indeterminate
+//            hud.show(animated: true)
+            QMUITips.showLoading("加载中", in: self.view)
+            JDXNetService.startRequest(url: JDXApiDefine.productDetailGet,
+                                       params:["sPDNum":num,"sShopNum":defaultShopNum],
+                                       finishedCallback: { (result) in
+                                       QMUITips.hideAllTips(in: self.view)
+//                                        print(result.data)
+                                        if let actualData = JDXProductDetailInfo.deserialize(from: result.data as? Dictionary){
+                                            self.productDetailInfo = actualData
+                                            self.goodsInfoView!.setData(data: self.productDetailInfo!)
+                                        }
+                                        
+            }) { (fail) in
+                
+            }
+        }
+        
+    }
+    override func viewDidLayoutSubviews() {
+        self.bottomScrollView!.frame = self.view.frame
+        self.goodsInfoView!.frame = CGRect.init(x: 0, y: 0, width: self.bottomScrollView!.frame.size.width, height: self.bottomScrollView!.frame.size.height)
     }
 }

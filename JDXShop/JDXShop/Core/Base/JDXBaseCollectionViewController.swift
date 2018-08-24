@@ -41,9 +41,8 @@ class JDXBaseCollectionViewController: UICollectionViewController,UICollectionVi
         
     }
     //获取选中的值
-    public func getCellData(indexPath:NSIndexPath)->AnyObject{
-        
-        return "" as AnyObject;
+    public func getCellData(indexPath:NSIndexPath)->AnyObject?{
+        return nil;
     }
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

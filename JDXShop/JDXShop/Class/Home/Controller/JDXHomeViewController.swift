@@ -46,8 +46,11 @@ class JDXHomeViewController: JDXBaseCollectionViewController,JDXLimitSaleViewPro
 
         }
     }
-    override func getCellData(indexPath: NSIndexPath) -> AnyObject {
-        return self.dataRecords![indexPath.row] as AnyObject
+    override func getCellData(indexPath:NSIndexPath)->AnyObject?{
+        if indexPath.section == 4 {
+            return self.dataRecords?[indexPath.row] as! JDXHomePageProductInfo
+        }
+        return nil
     }
 }
 
@@ -72,8 +75,11 @@ extension JDXHomeViewController{
         return 0
     }
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cellItem = super.getCellData(indexPath: indexPath as NSIndexPath)
-        let detailPage = JDXProductDetailController.init(style: UITableViewStyle.plain)
+        let cellItem = self.getCellData(indexPath: indexPath as NSIndexPath) as! JDXHomePageProductInfo
+        let detailPage = JDXProductDetailController()
+        if let num = cellItem.rOpenParam {
+            detailPage.goodsNum = num
+        }
         self.navigationController?.pushViewController(detailPage, animated: true)
     }
     //设置显示头视图

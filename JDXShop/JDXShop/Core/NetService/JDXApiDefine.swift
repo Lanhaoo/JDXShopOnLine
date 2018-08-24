@@ -9,8 +9,8 @@
 import UIKit
 
 class JDXApiDefine: NSObject {
-    //单例模式
-    public static let domain = "https://api.jdxiang.cn/JDXOnlineShop/"
+    
+    public static let domain = "https://api.qindashi.cn/JDXOnlineShop/"
     
     public static let recommented = "JDXRecommendGetO"
     
@@ -19,5 +19,7 @@ class JDXApiDefine: NSObject {
     public static let productSearchKind = "JDXProductSearchKindGetO"
     
     public static let productSearchKindGet = "JDXProductSearchKindGetO"
+    
+    public static let productDetailGet = "JDXProductDetailGetO"
     
 }

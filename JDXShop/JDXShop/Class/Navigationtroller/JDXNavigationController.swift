@@ -16,8 +16,8 @@ class JDXNavigationController: UINavigationController,UINavigationControllerDele
         self.delegate = self;
         self.interactivePopGestureRecognizer?.delegate = self;
         
-        self.navigationBar.isTranslucent = false
-        self.tabBarController?.tabBar.isTranslucent = false
+//        self.navigationBar.isTranslucent = false
+//        self.tabBarController?.tabBar.isTranslucent = false
         //去掉底部横线
 //        self.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
 //        self.navigationBar.shadowImage = UIImage()

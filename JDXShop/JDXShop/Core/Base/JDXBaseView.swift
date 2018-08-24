@@ -13,11 +13,14 @@ class JDXBaseView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         jdx_addSubViews()
+        loadData()
     }
     public func jdx_addSubViews(){
         
     }
+    public func loadData(){
     
+    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

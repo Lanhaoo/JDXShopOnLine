@@ -38,6 +38,9 @@
 		DE8A5592212EA62B004797D2 /* JDXTimeLimitSaleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5591212EA62B004797D2 /* JDXTimeLimitSaleController.swift */; };
 		DE8A5594212EB2AF004797D2 /* JDXTimeLimitInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */; };
 		DE8A5596212EB606004797D2 /* JDXTimeLimitSaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */; };
+		DE8A55E6212FA07A004797D2 /* JDXGoodsInfoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A55E5212FA07A004797D2 /* JDXGoodsInfoContainerView.swift */; };
+		DE8A55E8212FA599004797D2 /* JDXGoodsInfoTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A55E7212FA599004797D2 /* JDXGoodsInfoTableView.swift */; };
+		DE8A55EA212FB0F1004797D2 /* JDXProductDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A55E9212FB0F1004797D2 /* JDXProductDetailInfo.swift */; };
 		DE9AF8942122AAF80062D172 /* JDXTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF8932122AAF80062D172 /* JDXTabbarController.swift */; };
 		DE9AF89A2122B0570062D172 /* JDXHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF8992122B0570062D172 /* JDXHomeViewController.swift */; };
 		DE9AF89C2122B0660062D172 /* JDXCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9AF89B2122B0660062D172 /* JDXCategoryViewController.swift */; };
@@ -91,6 +94,9 @@
 		DE8A5591212EA62B004797D2 /* JDXTimeLimitSaleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitSaleController.swift; sourceTree = "<group>"; };
 		DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitInfo.swift; sourceTree = "<group>"; };
 		DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTimeLimitSaleCell.swift; sourceTree = "<group>"; };
+		DE8A55E5212FA07A004797D2 /* JDXGoodsInfoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXGoodsInfoContainerView.swift; sourceTree = "<group>"; };
+		DE8A55E7212FA599004797D2 /* JDXGoodsInfoTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXGoodsInfoTableView.swift; sourceTree = "<group>"; };
+		DE8A55E9212FB0F1004797D2 /* JDXProductDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXProductDetailInfo.swift; sourceTree = "<group>"; };
 		DE9AF8932122AAF80062D172 /* JDXTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXTabbarController.swift; sourceTree = "<group>"; };
 		DE9AF8992122B0570062D172 /* JDXHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXHomeViewController.swift; sourceTree = "<group>"; };
 		DE9AF89B2122B0660062D172 /* JDXCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXCategoryViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +295,7 @@
 				DE9AF8B82122D0640062D172 /* HomePageBanner.swift */,
 				DE9AF8BD2125861B0062D172 /* JDXHomePageProductInfo.swift */,
 				DE8A5593212EB2AF004797D2 /* JDXTimeLimitInfo.swift */,
+				DE8A55E9212FB0F1004797D2 /* JDXProductDetailInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -302,6 +309,8 @@
 				DE8A5578212AC9F9004797D2 /* JDXKindMenuView.swift */,
 				DE8A557D212BBFAB004797D2 /* JDXBrandView.swift */,
 				DE8A5595212EB606004797D2 /* JDXTimeLimitSaleCell.swift */,
+				DE8A55E5212FA07A004797D2 /* JDXGoodsInfoContainerView.swift */,
+				DE8A55E7212FA599004797D2 /* JDXGoodsInfoTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -456,8 +465,10 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -468,8 +479,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -495,6 +508,7 @@
 				DE9AF89A2122B0570062D172 /* JDXHomeViewController.swift in Sources */,
 				DE8A557E212BBFAB004797D2 /* JDXBrandView.swift in Sources */,
 				A0F5D210212DA9D700A9643B /* ImageViewUtils.swift in Sources */,
+				DE8A55E8212FA599004797D2 /* JDXGoodsInfoTableView.swift in Sources */,
 				A0F5D218212DA9D700A9643B /* JDXTableParseDataService.swift in Sources */,
 				A0F5D213212DA9D700A9643B /* YYWeakProxy.m in Sources */,
 				DE8A55702127C2BE004797D2 /* JDXHomePageProductCell.swift in Sources */,
@@ -512,9 +526,11 @@
 				DE8A5579212AC9F9004797D2 /* JDXKindMenuView.swift in Sources */,
 				DE9AF8BE2125861B0062D172 /* JDXHomePageProductInfo.swift in Sources */,
 				DE9AF89E2122B0730062D172 /* JDXMessageViewController.swift in Sources */,
+				DE8A55E6212FA07A004797D2 /* JDXGoodsInfoContainerView.swift in Sources */,
 				DE9AF8A52122B0F20062D172 /* JDXNavigationController.swift in Sources */,
 				DE8A5577212AC536004797D2 /* JDXLimitSaleView.swift in Sources */,
 				A0F5D21C212DA9D700A9643B /* JDXTableDataManager.swift in Sources */,
+				DE8A55EA212FB0F1004797D2 /* JDXProductDetailInfo.swift in Sources */,
 				A0F5D214212DA9D700A9643B /* YYFPSLabel.m in Sources */,
 				A0F5D21E212DA9D700A9643B /* JDXBaseCollectionViewCell.swift in Sources */,
 				DE9AF8A22122B0910062D172 /* JDXProfileViewController.swift in Sources */,
@@ -676,10 +692,7 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "JDXShop/JDXShop-Bridging-Header.h";
@@ -699,10 +712,7 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "JDXShop/JDXShop-Bridging-Header.h";

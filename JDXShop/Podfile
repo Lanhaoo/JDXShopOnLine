@@ -15,6 +15,5 @@ target 'JDXShop' do
     pod 'HandyJSON', '~> 4.1.1'
     pod 'Kingfisher'
     pod 'Reachability'
-    pod 'YYModel'
-    pod 'JSONModel'
+    pod 'MBProgressHUD'
 end
