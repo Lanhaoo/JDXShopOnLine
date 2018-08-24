@@ -8,7 +8,7 @@
 
 import UIKit
 class HomePageBannerView: UICollectionReusableView {
-    var banner:SDCycleScrollView!
+    var banner:JDXCustomScrollView!
     let bannerModel=HomePageBanner()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,7 +18,7 @@ class HomePageBannerView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     func jdx_addSubViews() {
-        banner = SDCycleScrollView.init(frame: self.bounds)
+        banner = JDXCustomScrollView.init(frame: self.bounds)
         self.addSubview(banner)
         var banners : Array<String> = Array<String>()
         bannerModel.fetchBannerData(complectedCallback: { result in

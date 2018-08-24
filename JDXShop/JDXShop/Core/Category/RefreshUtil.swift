@@ -49,5 +49,24 @@ extension UIScrollView{
         self.mj_footer = footer
     }
     
+    //以下两个方法只适用于 商品详情页 上下拉刷新 类似于京东 详情页 其他页面不需要使用
+    public func addHeaderRefreshForGoodsDetailView(complectedCallback:@escaping () -> ()){
+        let header = MJRefreshNormalHeader.init(refreshingBlock: complectedCallback)
+        header?.setTitle("下拉查看商品详情", for: MJRefreshState.idle)
+        header?.setTitle("松开即可查看商品详情", for: MJRefreshState.pulling)
+        header?.setTitle("正在获取商品详情", for: MJRefreshState.refreshing)
+        header?.lastUpdatedTimeLabel.isHidden = true
+        self.mj_header = header
+    }
+    public func addFooterRefreshForGoodsDetailView(complectedCallback:@escaping () -> ()){
+        let footer = MJRefreshBackNormalFooter.init(refreshingBlock: complectedCallback)
+        footer?.stateLabel.isHidden = false
+        footer?.setTitle("上拉查看商品信息", for: MJRefreshState.idle)
+        footer?.setTitle("松开即可查看商品信息", for: MJRefreshState.pulling)
+        footer?.setTitle("正在获取商品信息", for: MJRefreshState.refreshing)
+        footer?.setTitle("上拉查看商品信息", for: MJRefreshState.noMoreData)
+        self.mj_footer = footer
+    }
+    
     
 }

@@ -49,7 +49,7 @@ class JDXGoodsInfoContainerView: UIView {
         //bottomGoodsInfoWebView 位于 topGoodBaseInfoTableView 下方
         let webConfiguration = WKWebViewConfiguration()
         self.bottomGoodsInfoWebView = WKWebView.init(frame:CGRect.init(x: 0, y: height, width:width, height: height), configuration: webConfiguration)
-        self.bottomGoodsInfoWebView?.load(URLRequest.init(url: URL.init(string: "https://www.jianshu.com/p/091bf2467d67")!))
+        self.bottomGoodsInfoWebView?.load(URLRequest.init(url: URL.init(string: "http://xzgw.jdxiang.cn/doc/API_Doc_XZGW.html")!))
         self.bottomScrollView.addSubview(self.bottomGoodsInfoWebView)
         
         
@@ -58,11 +58,11 @@ class JDXGoodsInfoContainerView: UIView {
         self.topGoodBaseInfoTableView.tableView?.addHeaderRefresh {
             weakself?.topGoodBaseInfoTableView.tableView!.mj_header.endRefreshing()
         }
-        self.topGoodBaseInfoTableView.tableView?.addFooterRefresh {
+        self.topGoodBaseInfoTableView.tableView?.addFooterRefreshForGoodsDetailView  {
             weakself?.bottomScrollView.setContentOffset(CGPoint.init(x: 0, y: height), animated: true)
             weakself?.topGoodBaseInfoTableView.tableView?.mj_footer.endRefreshing()
         }
-        self.bottomGoodsInfoWebView.scrollView.addHeaderRefresh {
+        self.bottomGoodsInfoWebView.scrollView.addHeaderRefreshForGoodsDetailView {
             weakself?.bottomScrollView.setContentOffset(CGPoint.init(x: 0, y: 0), animated: true)
             weakself?.bottomGoodsInfoWebView.scrollView.mj_header.endRefreshing()
         }

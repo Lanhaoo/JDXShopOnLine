@@ -18,7 +18,7 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
     var priceRangeLabel:UILabel?
     var oldPriceLabel:UILabel?
     var discountLabel:UILabel?
-    var banner:SDCycleScrollView?
+    var banner:JDXCustomScrollView?
     override func jdx_addSubViews() {
         tableView = UITableView.init(frame: self.frame)
         tableView?.delegate = self;
@@ -38,7 +38,7 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
             make.top.equalToSuperview()
             make.left.right.equalTo(self)
         })
-        banner = SDCycleScrollView()
+        banner = JDXCustomScrollView()
         headerView?.addSubview(banner!)
         banner?.snp.makeConstraints({ (make) in
             make.top.equalToSuperview()

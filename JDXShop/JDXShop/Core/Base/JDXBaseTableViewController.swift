@@ -66,6 +66,16 @@ class JDXBaseTableViewController: JDXBaseViewController,UITableViewDataSource,UI
     override func viewDidLoad() {
         initTableView()
         super.viewDidLoad()
+        setTableViewContentInset()
+    }
+    private func setTableViewContentInset(){
+        if #available(iOS 11, *) {
+            if self.isViewLoaded{
+                self.tableView?.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.automatic
+            }else{
+                self.automaticallyAdjustsScrollViewInsets = true
+            }
+        }
     }
     /// 子类必须实现的方法！！！！！
     func initNetService() {

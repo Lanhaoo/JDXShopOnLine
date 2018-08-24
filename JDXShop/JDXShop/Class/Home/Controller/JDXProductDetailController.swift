@@ -14,9 +14,21 @@ class JDXProductDetailController: JDXBaseViewController {
     /// 底部的滚动图
     var bottomScrollView:UIScrollView?
     //商品详情
-   var goodsInfoView:JDXGoodsInfoContainerView?
+    var goodsInfoView:JDXGoodsInfoContainerView?
     override func viewDidLoad() {
         super.viewDidLoad()
+        //解决 滚动图 向下偏移的bug
+        setTableViewContentInset()
+    }
+    private func setTableViewContentInset(){
+        //这段代码的作用是 当设置完当前导航栏不透明的时候 界面坐标 依旧从（0，0）开始计算
+        /*
+         系统默认是如果当前 导航栏被设置为 不透明，界面坐标 从（0，导航栏+状态栏的高度）开始计算
+         会造成界面整体向下偏移 导航栏+状态栏的高度
+         */
+        if self.navigationController?.navigationBar.isTranslucent == false {
+            self.extendedLayoutIncludesOpaqueBars = true;
+        }
     }
     override func jdx_addSubViews() {
         self.view.backgroundColor = UIColor.cyan
@@ -30,34 +42,27 @@ class JDXProductDetailController: JDXBaseViewController {
         self.goodsInfoView = JDXGoodsInfoContainerView.init(frame: CGRect.init(x: 0, y: 0, width: self.bottomScrollView!.frame.size.width, height: self.bottomScrollView!.frame.size.height))
         self.bottomScrollView?.addSubview(self.goodsInfoView!)
         
-        //解决 滚动图 向下偏移的bug
-        if #available(iOS 11.0, *) {
-            self.bottomScrollView?.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-            self.goodsInfoView?.bottomScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentBehavior.never
-        } else {
-            self.automaticallyAdjustsScrollViewInsets = false
-        }
-        
         if let num = self.goodsNum {
             self.goodsInfoView!.goodsNum = num
-//            let hud = MBProgressHUD.init(view: self.view)
-//            self.view.addSubview(hud)
-//            hud.label.text = "加载中"
-//            hud.mode = MBProgressHUDMode.indeterminate
-//            hud.show(animated: true)
+            //            let hud = MBProgressHUD.init(view: self.view)
+            //            self.view.addSubview(hud)
+            //            hud.label.text = "加载中"
+            //            hud.mode = MBProgressHUDMode.indeterminate
+            //            hud.show(animated: true)
             QMUITips.showLoading("加载中", in: self.view)
-            JDXNetService.startRequest(url: JDXApiDefine.productDetailGet,
-                                       params:["sPDNum":num,"sShopNum":defaultShopNum],
-                                       finishedCallback: { (result) in
-                                       QMUITips.hideAllTips(in: self.view)
-//                                        print(result.data)
-                                        if let actualData = JDXProductDetailInfo.deserialize(from: result.data as? Dictionary){
-                                            self.productDetailInfo = actualData
-                                            self.goodsInfoView!.setData(data: self.productDetailInfo!)
-                                        }
-                                        
-            }) { (fail) in
+            JDXNetService.startRequest(url: JDXApiDefine.productDetailGet,params:["sPDNum":num,"sShopNum":defaultShopNum],finishedCallback: { (result) in
+                QMUITips.hideAllTips(in: self.view)
+                //print(result.data)
+                if let actualData = JDXProductDetailInfo.deserialize(from: result.data as? Dictionary){
+                    self.productDetailInfo = actualData
+                    self.goodsInfoView!.setData(data: self.productDetailInfo!)
+                }
                 
+            }) { (fail) in
+                QMUITips.hideAllTips(in: self.view)
+                if let msg = fail.Messige{
+                    QMUITips.showError(msg, in: self.view, hideAfterDelay: 2.0)
+                }
             }
         }
         
