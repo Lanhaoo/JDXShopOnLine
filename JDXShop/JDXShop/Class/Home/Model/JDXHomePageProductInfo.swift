@@ -40,7 +40,7 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
                 }
             }
             complectedCallback(dataRecords)
-        }) { (error) in
+        }) {
             
         }
     }
@@ -57,7 +57,7 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
                     }
                 }
                 complectedCallback(dataRecords)
-            }) { (error) in
+            }) {
                 
             }
     }
@@ -75,8 +75,8 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
                 
             }
             complectedCallback(dataRecords)
-        }) { (error) in
-            print(error)
+        }) {
+            
         }
     }
     //获取 热门分类
@@ -91,8 +91,8 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
                 }
             }
             complectedCallback(dataRecords)
-        }) { (error) in
-            print(error)
+        }) {
+            
         }
     }
     //获取 品牌
@@ -107,8 +107,8 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
                 }
             }
             complectedCallback(dataRecords)
-        }) { (error) in
-            print(error)
+        }) {
+            
         }
     }
 }

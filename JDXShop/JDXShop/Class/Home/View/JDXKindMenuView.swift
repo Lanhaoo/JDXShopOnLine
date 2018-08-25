@@ -51,37 +51,34 @@ class JDXKindMenuView: UICollectionReusableView {
         gridView.rowHeight = scaleWidth(width: 80.0)
         gridView.backgroundColor = UIColor.white
         self.addSubview(gridView)
-        
-        //添加子视图
-        classifyModel.loadClassifyData(complectedCallback: { (result) in
-            for item in result{
-                let btnBGView = UIView()
-                btnBGView.backgroundColor = UIColor.white
-                self.gridView.addSubview(btnBGView)
-                
-                let topImageView = UIImageView()
-                topImageView.showImage(url: item.rPictureURL, placeholder: nil)
-                btnBGView.addSubview(topImageView)
-                topImageView.snp.makeConstraints({ (make) in
-                    make.width.equalTo(scaleWidth(width: 48.0))
-                    make.height.equalTo(scaleWidth(width: 48.0))
-                    make.centerX.equalToSuperview()
-                    make.top.equalTo(scaleWidth(width: 5.0))
-                })
-                
-                let bottomLabel = UILabel()
-                bottomLabel.textColor = UIColor.qmui_color(withHexString: "#666666")
-                bottomLabel.font = UIFont.systemFont(ofSize: 14)
-                bottomLabel.text = item.rTitle
-                btnBGView.addSubview(bottomLabel)
-                bottomLabel.snp.makeConstraints({ (make) in
-                    make.top.equalTo(topImageView.snp.bottom).offset(scaleWidth(width: 7.0))
-                    make.centerX.equalToSuperview()
-                    make.height.equalTo(scaleWidth(width: 13.0))
-                })
-            }
-        }) {
+    }
+    //拿到c层返回的数据
+    func setKindMenuViewData(result:Array<JDXHomePageProductInfo>) {
+        for item in result{
+            let btnBGView = UIView()
+            btnBGView.backgroundColor = UIColor.white
+            self.gridView.addSubview(btnBGView)
             
+            let topImageView = UIImageView()
+            topImageView.showImage(url: item.rPictureURL, placeholder: nil)
+            btnBGView.addSubview(topImageView)
+            topImageView.snp.makeConstraints({ (make) in
+                make.width.equalTo(scaleWidth(width: 48.0))
+                make.height.equalTo(scaleWidth(width: 48.0))
+                make.centerX.equalToSuperview()
+                make.top.equalTo(scaleWidth(width: 5.0))
+            })
+            
+            let bottomLabel = UILabel()
+            bottomLabel.textColor = UIColor.qmui_color(withHexString: "#666666")
+            bottomLabel.font = UIFont.systemFont(ofSize: 14)
+            bottomLabel.text = item.rTitle
+            btnBGView.addSubview(bottomLabel)
+            bottomLabel.snp.makeConstraints({ (make) in
+                make.top.equalTo(topImageView.snp.bottom).offset(scaleWidth(width: 7.0))
+                make.centerX.equalToSuperview()
+                make.height.equalTo(scaleWidth(width: 13.0))
+            })
         }
     }
 }

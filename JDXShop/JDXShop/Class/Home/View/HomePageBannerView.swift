@@ -20,13 +20,21 @@ class HomePageBannerView: UICollectionReusableView {
     func jdx_addSubViews() {
         banner = JDXCustomScrollView.init(frame: self.bounds)
         self.addSubview(banner)
+//        var banners : Array<String> = Array<String>()
+//        bannerModel.fetchBannerData(complectedCallback: { result in
+//            for item in result{
+//                banners.append(item.rPictureURL!)
+//            }
+//            self.banner.imageURLStringsGroup = banners
+//        })
+    }
+    //通过c层 传递回网络请求的结果
+    func setData(result:Array<HomePageBanner>){
         var banners : Array<String> = Array<String>()
-        bannerModel.fetchBannerData(complectedCallback: { result in
-            for item in result{
-                banners.append(item.rPictureURL!)
-            }
-            self.banner.imageURLStringsGroup = banners
-        })
+        for item in result{
+            banners.append(item.rPictureURL!)
+        }
+        self.banner.imageURLStringsGroup = banners
     }
     override func layoutSubviews() {
         self.banner.frame = self.bounds

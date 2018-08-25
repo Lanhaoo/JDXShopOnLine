@@ -15,6 +15,20 @@ class JDXBrandView: UICollectionReusableView {
         super.init(frame: frame)
         jdx_addSubViews()
     }
+    //拿到c层返回的数据
+    func setBrandViewData(result:Array<JDXHomePageProductInfo>) {
+        for item in result{
+            let btnBGView = UIView()
+            btnBGView.backgroundColor = UIColor.white
+            self.gridView.addSubview(btnBGView)
+            let itemImageView = UIImageView()
+            itemImageView.showImage(url: item.rPictureURL, placeholder: nil)
+            btnBGView.addSubview(itemImageView)
+            itemImageView.snp.makeConstraints({ (make) in
+                make.edges.equalToSuperview()
+            })
+        }
+    }
     func jdx_addSubViews() {
         let topView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleWidth(width: 44.0)))
         topView.backgroundColor = UIColor.white
@@ -47,22 +61,6 @@ class JDXBrandView: UICollectionReusableView {
         gridView.rowHeight = scaleWidth(width: 94.0)
         gridView.backgroundColor = UIColor.white
         self.addSubview(gridView)
-        
-        brand.loadBrandData(complectedCallback: { (result) in
-            for item in result{
-                let btnBGView = UIView()
-                btnBGView.backgroundColor = UIColor.white
-                self.gridView.addSubview(btnBGView)
-                let itemImageView = UIImageView()
-                itemImageView.showImage(url: item.rPictureURL, placeholder: nil)
-                btnBGView.addSubview(itemImageView)
-                itemImageView.snp.makeConstraints({ (make) in
-                    make.edges.equalToSuperview()
-                })
-            }
-        }) {
-            
-        }
         
         let bottomView = UIView()
         self.addSubview(bottomView)

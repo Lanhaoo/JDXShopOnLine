@@ -44,28 +44,19 @@ class JDXProductDetailController: JDXBaseViewController {
         
         if let num = self.goodsNum {
             self.goodsInfoView!.goodsNum = num
-            //            let hud = MBProgressHUD.init(view: self.view)
-            //            self.view.addSubview(hud)
-            //            hud.label.text = "加载中"
-            //            hud.mode = MBProgressHUDMode.indeterminate
-            //            hud.show(animated: true)
             QMUITips.showLoading("加载中", in: self.view)
             JDXNetService.startRequest(url: JDXApiDefine.productDetailGet,params:["sPDNum":num,"sShopNum":defaultShopNum],finishedCallback: { (result) in
                 QMUITips.hideAllTips(in: self.view)
-                //print(result.data)
+                print(result.data)
                 if let actualData = JDXProductDetailInfo.deserialize(from: result.data as? Dictionary){
                     self.productDetailInfo = actualData
                     self.goodsInfoView!.setData(data: self.productDetailInfo!)
                 }
                 
-            }) { (fail) in
+            }) {
                 QMUITips.hideAllTips(in: self.view)
-                if let msg = fail.Messige{
-                    QMUITips.showError(msg, in: self.view, hideAfterDelay: 2.0)
-                }
             }
         }
-        
     }
     override func viewDidLayoutSubviews() {
         self.bottomScrollView!.frame = self.view.frame

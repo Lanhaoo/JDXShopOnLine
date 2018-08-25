@@ -25,14 +25,13 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
         tableView?.dataSource = self;
         tableView?.tableFooterView = UIView()
         self.addSubview(tableView!)
-        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView?.register(JDXGoodsInfoTableViewCell.self, forCellReuseIdentifier: "JDXGoodsInfoTableViewCell")
 
         createTableHeaderView()
     }
     //创建表格头视图 分为两个部分 上面是 banner 下面是商品的具体信息和价格
     func createTableHeaderView() {
         headerView = UIView()
-//        headerView?.backgroundColor = UIColor.red
         self.tableView?.tableHeaderView = headerView
         headerView?.snp.makeConstraints({ (make) in
             make.top.equalToSuperview()
@@ -144,17 +143,71 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
     }
 }
 extension JDXGoodsInfoTableView{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return scaleWidth(width: 10.0)
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: scaleWidth(width: 10.0)))
+        if self.goodsInfo != nil {
+            view.backgroundColor = UIColor.qmui_color(withHexString: "#eeeeee")
+        }else{
+            view.backgroundColor = UIColor.white
+        }
+        return view
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : UITableViewCell? = nil
-        cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+        var cell : JDXGoodsInfoTableViewCell? = nil
+        cell = tableView.dequeueReusableCell(withIdentifier: "JDXGoodsInfoTableViewCell") as? JDXGoodsInfoTableViewCell
         cell?.textLabel?.text = "测试"
 //        if let actualCell = cell{
         
 //            actualCell.backgroundView?.backgroundColor = UIColor.cyan
 //        }
         return cell!
+    }
+}
+
+class JDXGoodsInfoTableViewCell: JDXBaseTableViewCell {
+    var leftTitleLabel:UILabel?
+    var centerContentLabel:UILabel?
+    var rightMoreLabel:UILabel?
+    override func jdx_addSubViews() {
+        leftTitleLabel = UILabel()
+        leftTitleLabel?.font = UIFont.systemFont(ofSize: 13)
+        leftTitleLabel?.textColor = UIColor.qmui_color(withHexString: "#9b9b9b")
+        self.contentView.addSubview(leftTitleLabel!)
+        leftTitleLabel?.snp.makeConstraints({ (make) in
+            make.left.equalTo(scaleWidth(width: 17.0))
+            make.centerY.equalToSuperview()
+        })
+        
+        centerContentLabel = UILabel()
+        centerContentLabel?.font = UIFont.systemFont(ofSize: 13)
+        centerContentLabel?.textColor = UIColor.qmui_color(withHexString: "#3b3b3b")
+        self.contentView.addSubview(centerContentLabel!)
+        centerContentLabel?.snp.makeConstraints({ (make) in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(self.leftTitleLabel!.snp.right).offset(scaleWidth(width: 17.0))
+        })
+        
+        rightMoreLabel = UILabel()
+        rightMoreLabel?.text = ">"
+        rightMoreLabel?.font = UIFont.systemFont(ofSize: 17)
+        rightMoreLabel?.textColor = UIColor.qmui_color(withHexString: "#3b3b3b")
+        self.contentView.addSubview(rightMoreLabel!)
+        rightMoreLabel?.snp.makeConstraints({ (make) in
+            make.centerY.equalToSuperview()
+            make.right.equalTo(-scaleWidth(width: 22.0))
+        })
     }
 }

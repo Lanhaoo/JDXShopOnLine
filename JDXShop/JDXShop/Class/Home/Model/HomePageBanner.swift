@@ -30,8 +30,8 @@ class HomePageBanner: NSObject,HandyJSON {
                 }
             }
             complectedCallback(banners)
-        }) { (error) in
-            print(error)
+        }) {
+            
         }
     }
 }

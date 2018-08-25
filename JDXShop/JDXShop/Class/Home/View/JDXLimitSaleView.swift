@@ -31,38 +31,31 @@ class JDXLimitSaleView: UICollectionReusableView {
         gridView.columnCount = 2
         gridView.rowHeight = scaleWidth(width: 253.0)
         gridView.backgroundColor = UIColor.white
-        
-        gridView.separatorWidth = scaleWidth(width: 1.0)
         gridView.separatorColor = UIColor.qmui_color(withHexString: "#f5f5f5")
-        
         self.addSubview(gridView)
         self.gridView.addSubview(self.timeLimitItemSaleView)
         self.gridView.addSubview(self.internalLimitItemSaleView)
-        
-        //获取限时特卖
-        productModel.loadTimeLimitSaleData(complectedCallback: { (result) in
-            for item in result{
-                self.timeLimitItemSaleView.updateUI(data: item)
-            }
-            //添加手势
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedTimeLimitView))
-            self.timeLimitItemSaleView.addGestureRecognizer(tap)
-        }) {
-            
-        }
-        //获取尚妆国际
-        productModel.loadInternalLimitSaleData(complectedCallback: { (result) in
-            for item in result{
-                self.internalLimitItemSaleView.updateUI(data: item)
-            }
-            //添加手势
-            let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedInterNalView))
-            self.internalLimitItemSaleView.addGestureRecognizer(tap)
-        }) {
-            
-        }
     }
     
+    func setTimeLimitViewData(result:Array<JDXHomePageProductInfo>) {
+        for item in result{
+            self.timeLimitItemSaleView.updateUI(data: item)
+        }
+        //添加手势
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedTimeLimitView))
+        self.timeLimitItemSaleView.addGestureRecognizer(tap)
+
+    }
+    
+    /// 拿到c层 返回的数据
+    func setInternalLimitSaleViewData(result:Array<JDXHomePageProductInfo>) {
+        for item in result{
+            self.internalLimitItemSaleView.updateUI(data: item)
+        }
+        //添加手势
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(self.selectedInterNalView))
+        self.internalLimitItemSaleView.addGestureRecognizer(tap)
+    }
     @objc func selectedTimeLimitView() {
         if let actualDelegate = self.delegate{
             actualDelegate.handleSelectedTimeLimitItem()
