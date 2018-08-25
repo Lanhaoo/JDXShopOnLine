@@ -18,16 +18,22 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
     var priceRangeLabel:UILabel?
     var oldPriceLabel:UILabel?
     var discountLabel:UILabel?
+    var recommendFooterView:JDXRecommendFooterView?
     var banner:JDXCustomScrollView?
+    let productModel = JDXHomePageProductInfo() //获取列表数据的模型层对象
+    var recommendProducts:Array<JDXHomePageProductInfo>? = Array<JDXHomePageProductInfo>() //推荐商品数据源
     override func jdx_addSubViews() {
         tableView = UITableView.init(frame: self.frame)
         tableView?.delegate = self;
         tableView?.dataSource = self;
         tableView?.tableFooterView = UIView()
         self.addSubview(tableView!)
-        tableView?.register(JDXGoodsInfoTableViewCell.self, forCellReuseIdentifier: "JDXGoodsInfoTableViewCell")
-
+        tableView?.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        
+        tableView?.register(JDXRecommendFooterView.self, forHeaderFooterViewReuseIdentifier: "JDXRecommendFooterView")
         createTableHeaderView()
+        
+        loadCommendProduct()
     }
     //创建表格头视图 分为两个部分 上面是 banner 下面是商品的具体信息和价格
     func createTableHeaderView() {
@@ -128,6 +134,15 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
         super.layoutSubviews()
         self.tableView?.frame = self.frame
     }
+    //获取推荐商品列表
+    func loadCommendProduct() {
+        productModel.loadProductData(page: 1, pageSize: 10, complectedCallback: { (result) in
+            self.recommendProducts = result
+            self.tableView?.reloadData()
+        }) {
+            
+        }
+    }
     //表格头视图 高度自适应
     func sizeHeaderToFit() {
         let headerView = self.tableView!.tableHeaderView!
@@ -144,70 +159,95 @@ class JDXGoodsInfoTableView: JDXBaseView,UITableViewDelegate,UITableViewDataSour
 }
 extension JDXGoodsInfoTableView{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return scaleWidth(width: 10.0)
+        return scaleWidth(width: 201.0)
     }
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: scaleWidth(width: 10.0)))
+        recommendFooterView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "JDXRecommendFooterView") as? JDXRecommendFooterView
+        if let data = self.recommendProducts {
+            recommendFooterView?.setData(products: data)
+            recommendProducts = nil
+        }
+        return recommendFooterView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return scaleWidth(width: 40.0)
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.size.width, height: scaleWidth(width: 40.0)))
         if self.goodsInfo != nil {
-            view.backgroundColor = UIColor.qmui_color(withHexString: "#eeeeee")
+            view.backgroundColor = UIColor.qmui_color(withHexString: "#f5f5f5")
         }else{
             view.backgroundColor = UIColor.white
         }
+        let label = UILabel()
+        label.text = "推荐商品"
+        label.font = UIFont.systemFont(ofSize: 15)
+        view.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.left.equalTo(scaleWidth(width: 17.0))
+            make.centerY.equalToSuperview()
+        }
         return view
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.001
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell : JDXGoodsInfoTableViewCell? = nil
-        cell = tableView.dequeueReusableCell(withIdentifier: "JDXGoodsInfoTableViewCell") as? JDXGoodsInfoTableViewCell
-        cell?.textLabel?.text = "测试"
-//        if let actualCell = cell{
-        
-//            actualCell.backgroundView?.backgroundColor = UIColor.cyan
-//        }
+        var cell : UITableViewCell? = nil
+        cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell")
         return cell!
     }
 }
-
-class JDXGoodsInfoTableViewCell: JDXBaseTableViewCell {
-    var leftTitleLabel:UILabel?
-    var centerContentLabel:UILabel?
-    var rightMoreLabel:UILabel?
-    override func jdx_addSubViews() {
-        leftTitleLabel = UILabel()
-        leftTitleLabel?.font = UIFont.systemFont(ofSize: 13)
-        leftTitleLabel?.textColor = UIColor.qmui_color(withHexString: "#9b9b9b")
-        self.contentView.addSubview(leftTitleLabel!)
-        leftTitleLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(scaleWidth(width: 17.0))
-            make.centerY.equalToSuperview()
-        })
-        
-        centerContentLabel = UILabel()
-        centerContentLabel?.font = UIFont.systemFont(ofSize: 13)
-        centerContentLabel?.textColor = UIColor.qmui_color(withHexString: "#3b3b3b")
-        self.contentView.addSubview(centerContentLabel!)
-        centerContentLabel?.snp.makeConstraints({ (make) in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(self.leftTitleLabel!.snp.right).offset(scaleWidth(width: 17.0))
-        })
-        
-        rightMoreLabel = UILabel()
-        rightMoreLabel?.text = ">"
-        rightMoreLabel?.font = UIFont.systemFont(ofSize: 17)
-        rightMoreLabel?.textColor = UIColor.qmui_color(withHexString: "#3b3b3b")
-        self.contentView.addSubview(rightMoreLabel!)
-        rightMoreLabel?.snp.makeConstraints({ (make) in
-            make.centerY.equalToSuperview()
-            make.right.equalTo(-scaleWidth(width: 22.0))
-        })
+class JDXRecommendFooterView: UITableViewHeaderFooterView {
+    var gridView:QMUIGridView?
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        gridView = QMUIGridView.init(frame: CGRect.init(x: 0, y: 0, width: kScreen_Width, height: scaleWidth(width: 200.0)))
+        gridView?.columnCount = 4
+        gridView?.rowHeight = scaleWidth(width: 200.0)/2
+        gridView?.separatorWidth = 0.5
+        self.addSubview(gridView!)
+    }
+    func setData(products:Array<JDXHomePageProductInfo>) {
+        for item in products {
+            let itemView = JDXRecommendProductGridViewItemView()
+            itemView.setItem(data: item)
+            gridView?.addSubview(itemView)
+        }
+    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
+class JDXRecommendProductGridViewItemView: JDXBaseView {
+    let imageView:UIImageView = {
+        var iv = UIImageView()
+        return iv
+    }()
+    let titleLabel:UILabel = {
+        var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = NSTextAlignment.center
+        label.textColor = UIColor.qmui_color(withHexString: "#f5f5f5")
+        return label
+    }()
+    override func jdx_addSubViews() {
+        self.addSubview(self.imageView)
+        self.imageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        self.imageView.addSubview(self.titleLabel)
+        self.titleLabel.snp.makeConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+    func setItem(data:JDXHomePageProductInfo)  {
+        self.imageView.showImage(url: data.rPictureURL, placeholder: nil)
+        self.titleLabel.text = data.rADTitle
+    }
+    
+}
+

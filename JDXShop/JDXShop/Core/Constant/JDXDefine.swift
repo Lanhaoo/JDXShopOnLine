@@ -28,6 +28,7 @@ let netServiceHeaders:HTTPHeaders = [
     "DBKey":"88cb975bfe4b850ffb759f47f3e856f2",
     "Token":"pnj7P5AXGPDXNMBH7dGZv2EgkTgj9mX2"
 ]
+
 //默认的店铺编号
 let defaultShopNum = 100001
 //导航栏的高度

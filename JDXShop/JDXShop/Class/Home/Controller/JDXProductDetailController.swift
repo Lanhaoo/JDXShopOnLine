@@ -20,6 +20,7 @@ class JDXProductDetailController: JDXBaseViewController {
         //解决 滚动图 向下偏移的bug
         setTableViewContentInset()
     }
+    
     private func setTableViewContentInset(){
         //这段代码的作用是 当设置完当前导航栏不透明的时候 界面坐标 依旧从（0，0）开始计算
         /*

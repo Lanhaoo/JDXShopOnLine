@@ -24,6 +24,7 @@ class JDXHomeViewController: JDXBaseCollectionViewController,JDXLimitSaleViewPro
     override func loadView() {
         super.loadView()
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "首页"
@@ -80,7 +81,7 @@ class JDXHomeViewController: JDXBaseCollectionViewController,JDXLimitSaleViewPro
             }
             sema.wait()
         }
-        //第四个网络请求 获取热门分类
+        //第四个网络请求 获取 热门分类
         queue.async(group: group) {
             let sema = DispatchSemaphore(value: 0)
             self.productModel.loadClassifyData(complectedCallback: { (result) in
