@@ -7,4 +7,4 @@
 #import <SDCycleScrollView/SDCycleScrollView.h>
 #import "YYFPSLabel.h"
 #import "UINavigationBar+Gradient.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+//#import <MBProgressHUD/MBProgressHUD.h>
