@@ -231,7 +231,8 @@ class JDXRecommendProductGridViewItemView: JDXBaseView {
         var label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13)
         label.textAlignment = NSTextAlignment.center
-        label.textColor = UIColor.qmui_color(withHexString: "#f5f5f5")
+        label.textColor = UIColor.white
+        label.backgroundColor = UIColor.black
         return label
     }()
     override func jdx_addSubViews() {

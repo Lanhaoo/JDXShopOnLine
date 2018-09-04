@@ -29,6 +29,7 @@
 		A0F5D221212DA9D700A9643B /* JDXBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5D20D212DA9D700A9643B /* JDXBaseTableViewCell.swift */; };
 		A0F5D222212DA9D700A9643B /* JDXBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5D20E212DA9D700A9643B /* JDXBaseTableViewController.swift */; };
 		B362B5E6454E20540E729965 /* Pods_JDXShop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75DC5284D1ED29CEE545D20 /* Pods_JDXShop.framework */; };
+		DE73F976213A34D9006748B1 /* LHSegmentMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE73F975213A34D9006748B1 /* LHSegmentMenuView.swift */; };
 		DE8A55702127C2BE004797D2 /* JDXHomePageProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A556F2127C2BE004797D2 /* JDXHomePageProductCell.swift */; };
 		DE8A5577212AC536004797D2 /* JDXLimitSaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5576212AC535004797D2 /* JDXLimitSaleView.swift */; };
 		DE8A5579212AC9F9004797D2 /* JDXKindMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8A5578212AC9F9004797D2 /* JDXKindMenuView.swift */; };
@@ -86,6 +87,7 @@
 		A0F5D20D212DA9D700A9643B /* JDXBaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDXBaseTableViewCell.swift; sourceTree = "<group>"; };
 		A0F5D20E212DA9D700A9643B /* JDXBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JDXBaseTableViewController.swift; sourceTree = "<group>"; };
 		B75DC5284D1ED29CEE545D20 /* Pods_JDXShop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDXShop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE73F975213A34D9006748B1 /* LHSegmentMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHSegmentMenuView.swift; sourceTree = "<group>"; };
 		DE8A556F2127C2BE004797D2 /* JDXHomePageProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXHomePageProductCell.swift; sourceTree = "<group>"; };
 		DE8A5576212AC535004797D2 /* JDXLimitSaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXLimitSaleView.swift; sourceTree = "<group>"; };
 		DE8A5578212AC9F9004797D2 /* JDXKindMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXKindMenuView.swift; sourceTree = "<group>"; };
@@ -210,6 +212,14 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		DE73F974213A34A5006748B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE73F975213A34D9006748B1 /* LHSegmentMenuView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DE8A5589212D0623004797D2 /* TransitioningAnimation */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +265,7 @@
 		DE9AF8952122B0030062D172 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				DE73F974213A34A5006748B1 /* View */,
 				DE9AF89B2122B0660062D172 /* JDXCategoryViewController.swift */,
 			);
 			path = Category;
@@ -501,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0F5D220212DA9D700A9643B /* JDXBaseView.swift in Sources */,
+				DE73F976213A34D9006748B1 /* LHSegmentMenuView.swift in Sources */,
 				A08BC703213049DC00A4FDA9 /* JDXCustomScrollView.swift in Sources */,
 				A0F5D21B212DA9D700A9643B /* JDXBaseModel.swift in Sources */,
 				A0F5D211212DA9D700A9643B /* JDXUIButtonUtil.swift in Sources */,
@@ -695,7 +707,10 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -717,7 +732,10 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
