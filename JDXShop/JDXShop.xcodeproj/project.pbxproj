@@ -57,6 +57,7 @@
 		DE9EF4972122A4D500DAFCB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9EF4952122A4D500DAFCB1 /* Main.storyboard */; };
 		DE9EF4992122A4D600DAFCB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9EF4982122A4D600DAFCB1 /* Assets.xcassets */; };
 		DE9EF49C2122A4D600DAFCB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9EF49A2122A4D600DAFCB1 /* LaunchScreen.storyboard */; };
+		DEFF18F421412B3B0007FAB1 /* JDXBaseNetOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF18F321412B3B0007FAB1 /* JDXBaseNetOperate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +119,7 @@
 		DE9EF49B2122A4D600DAFCB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE9EF49D2122A4D600DAFCB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE9EF4A32122A8D900DAFCB1 /* JDXShop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JDXShop-Bridging-Header.h"; sourceTree = "<group>"; };
+		DEFF18F321412B3B0007FAB1 /* JDXBaseNetOperate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXBaseNetOperate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 				A0F5D203212DA9D700A9643B /* JDXTableParseDataService.swift */,
 				A0F5D204212DA9D700A9643B /* JDXNetService.swift */,
 				A0F5D205212DA9D700A9643B /* JDXApiDefine.swift */,
+				DEFF18F321412B3B0007FAB1 /* JDXBaseNetOperate.swift */,
 			);
 			path = NetService;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEFF18F421412B3B0007FAB1 /* JDXBaseNetOperate.swift in Sources */,
 				A0F5D220212DA9D700A9643B /* JDXBaseView.swift in Sources */,
 				DE73F976213A34D9006748B1 /* LHSegmentMenuView.swift in Sources */,
 				A08BC703213049DC00A4FDA9 /* JDXCustomScrollView.swift in Sources */,

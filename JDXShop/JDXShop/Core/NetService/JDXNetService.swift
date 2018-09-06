@@ -60,73 +60,72 @@ class JDXNetService {
             }
         }
     }
-    /// 适用于返回数据是单个模型的 网络请求
-    class public func autoParseModelRequest<T:HandyJSON>(url:String!,
-                                   params:[String:Any]?,
-                                   resultModel:T,
-                                   finishedCallback:@escaping (_ result : T) -> (),
-                                   failCallback:@escaping () -> ()){
+    
+    /*
+     下面两种请求的方法会自动解析成功目标数据源 再返回，外界可以直接使用返回的数据
+     */
+    /// 适用于返回数据是单个模型的 网络请求 如服务器返回的数据格式:data:{key:value}
+    class public func requestForCustomModelResult<T:HandyJSON>(url:String!,
+                                                               params:[String:Any]?,
+                                                               resultModel:T,
+                                                               finishedCallback:@escaping (_ result : T) -> (),
+                                                               failCallback:@escaping () -> ()){
         
         
         
         
     }
-    
-    /// 适用于返回数据是数组类型的 网络请求
-    class public func autoParseListModelRequest<T:HandyJSON>(url:String!,
+    /// 适用于返回数据是数组类型的 网络请求 如服务器返回的数据格式:data:{[{key:value},{key:value}]}
+    class public func requestForArrayResult<T:HandyJSON>(url:String!,
                                                          params:[String:Any]?,
                                                          resultModel:T,
                                                          finishedCallback:@escaping (_ result :Array<T>) -> (),
                                                          failCallback:@escaping () -> ()){
         
-        if getNetWorksStatus(){
+        if getNetWorksStatus() {
             Alamofire.request(JDXApiDefine.domain+url,
-                              method:HTTPMethod.post,
+                              method: HTTPMethod.post,
                               parameters: params,
                               encoding: JSONEncoding.default,
                               headers: netServiceHeaders).responseData { (response) in
-                                switch response.result {
+                                switch response.result{
                                 case .success(let value):
-                                    do{
-                                        let json = try JSONSerialization.jsonObject(with: value, options: .mutableContainers)
-                                        let dic = json as! [String:Any]
-                                        if let object = NetResponse.deserialize(from: dic){
-                                            if object.Code == "200"{
-                                                //自动解析成目标数据 源
-                                                if let actualData = object.data as? Array<Any>{
-                                                    var resultArr = Array<T>()
-                                                    for item in actualData {
-                                                        
-                                                        if let ob = T.deserialize(from: item as? Dictionary){
-                                                            resultArr.append(ob)
-                                                        }
-                                                        
+                                do{
+                                    let resultJson = try JSONSerialization.jsonObject(with: value, options: .mutableContainers)
+                                    let resultDict = resultJson as! [String:Any]
+                                    if let resultObject = NetResponse.deserialize(from: resultDict){
+                                        //根据与服务端 约定好的code来判断
+                                        if resultObject.Code == "200"{
+                                            //自动解析成目标数据 源
+                                            if let actualData = resultObject.data as? Array<Any>{
+                                                var resultArr = Array<T>()
+                                                for item in actualData {
+                                                    if let ob = T.deserialize(from: item as? Dictionary){
+                                                        resultArr.append(ob)
                                                     }
-                                                    finishedCallback(resultArr)
-                                                    
                                                 }
-                                                
-                                            
-                                            }else{
-                                                if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
-                                                    QMUITips.showError(object.Messige ?? "暂无数据", in: view, hideAfterDelay: 2.0)
-                                                }
-                                                failCallback()
+                                                finishedCallback(resultArr)
+                                            }
+                                        }else{
+                                            //服务器端返回 错误
+                                            failCallback()
+                                            if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
+                                                QMUITips.showError(resultObject.Messige ?? "暂无数据", in: view, hideAfterDelay: 2.0)
                                             }
                                         }
-                                    }catch _ {
-                                        //执行到这里 说明服务器异常
-                                        if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
-                                            QMUITips.showError("服务器异常", in: view, hideAfterDelay: 2.0)
-                                        }
-                                        failCallback()
                                     }
-                                case .failure(let error):
+                                }catch _{
+                                    //执行到这里 说明服务器异常
+                                    failCallback()
+                                    if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
+                                        QMUITips.showError("服务器异常", in: view, hideAfterDelay: 2.0)
+                                    }
+                                }
+                                case .failure(_):
                                     failCallback()
                                     if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
                                         QMUITips.showError("服务器连接失败", in: view, hideAfterDelay: 2.0)
                                     }
-                                    print(error.localizedDescription)
                                 }
             }
         }else{
@@ -135,8 +134,6 @@ class JDXNetService {
                 QMUITips.showError("网络未连接", in: view, hideAfterDelay: 2.0)
             }
         }
-        
-        
     }
     
 }

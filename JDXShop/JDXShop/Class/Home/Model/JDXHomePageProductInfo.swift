@@ -29,84 +29,40 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
     }
     //获取 限时特卖
     public func loadTimeLimitSaleData(complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){
-        var dataRecords:Array<JDXHomePageProductInfo> = Array<JDXHomePageProductInfo>()
-        JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":2,"iPageNo":1,"iPagePer":10], finishedCallback: { (result) in
-            if let actualData = result.data as? Array<Any>{
-                for item in actualData{
-                    print(item)
-                    if let object = JDXHomePageProductInfo.deserialize(from: item as? Dictionary){
-                        dataRecords.append(object)
-                    }
-                }
-            }
-            complectedCallback(dataRecords)
+        JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet, params: ["sPosition":2,"iPageNo":1,"iPagePer":10], resultModel: JDXHomePageProductInfo(), finishedCallback: { (result) in
+            complectedCallback(result)
         }) {
             
         }
     }
     //获取 尚妆国际
     public func loadInternalLimitSaleData(complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){
-            var dataRecords:Array<JDXHomePageProductInfo> = Array<JDXHomePageProductInfo>()
-            JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":3,"iPageNo":1,"iPagePer":10], finishedCallback: { (result) in
-                if let actualData = result.data as? Array<Any>{
-                    for item in actualData{
-                        print(item)
-                        if let object = JDXHomePageProductInfo.deserialize(from: item as? Dictionary){
-                            dataRecords.append(object)
-                        }
-                    }
-                }
-                complectedCallback(dataRecords)
-            }) {
-                
-            }
+        JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet, params: ["sPosition":3,"iPageNo":1,"iPagePer":10], resultModel: JDXHomePageProductInfo(), finishedCallback: { (result) in
+            complectedCallback(result)
+        }) {
+            
+        }
     }
     //获取 热门推荐
     public func loadProductData(page:Int,pageSize:Int,complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){
-        var dataRecords:Array<JDXHomePageProductInfo> = Array<JDXHomePageProductInfo>()
-        JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"6","iPageNo":page,"iPagePer":pageSize], finishedCallback: { (result) in
-            if let actualData = result.data as? Array<Any>{
-                
-                for item in actualData{
-                    if let object = JDXHomePageProductInfo.deserialize(from: item as? Dictionary){
-                        dataRecords.append(object)
-                    }
-                }
-                
-            }
-            complectedCallback(dataRecords)
+        JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"6","iPageNo":page,"iPagePer":pageSize], resultModel: JDXHomePageProductInfo(), finishedCallback: { (result) in
+            complectedCallback(result)
         }) {
             
         }
     }
     //获取 热门分类
     public func loadClassifyData(complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){
-        var dataRecords:Array<JDXHomePageProductInfo> = Array<JDXHomePageProductInfo>()
-        JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"5","iPageNo":1,"iPagePer":10], finishedCallback: { (result) in
-            if let actualData = result.data as? Array<Any>{
-                for item in actualData{
-                    if let object = JDXHomePageProductInfo.deserialize(from: item as? Dictionary){
-                        dataRecords.append(object)
-                    }
-                }
-            }
-            complectedCallback(dataRecords)
+        JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"5","iPageNo":1,"iPagePer":10], resultModel: JDXHomePageProductInfo(), finishedCallback: { (result) in
+            complectedCallback(result)
         }) {
             
         }
     }
     //获取 品牌
     public func loadBrandData(complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){
-        var dataRecords:Array<JDXHomePageProductInfo> = Array<JDXHomePageProductInfo>()
-        JDXNetService.startRequest(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"4","iPageNo":1,"iPagePer":10], finishedCallback: { (result) in
-            if let actualData = result.data as? Array<Any>{
-                for item in actualData{
-                    if let object = JDXHomePageProductInfo.deserialize(from: item as? Dictionary){
-                        dataRecords.append(object)
-                    }
-                }
-            }
-            complectedCallback(dataRecords)
+        JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet, params: ["sPosition":"4","iPageNo":1,"iPagePer":10], resultModel: JDXHomePageProductInfo(), finishedCallback: { (result) in
+            complectedCallback(result)
         }) {
             
         }
