@@ -90,6 +90,7 @@ class JDXNetService {
                               headers: netServiceHeaders).responseData { (response) in
                                 switch response.result{
                                 case .success(let value):
+                                LHCacheManager.cacheManager.loadCacheDir()
                                 do{
                                     let resultJson = try JSONSerialization.jsonObject(with: value, options: .mutableContainers)
                                     let resultDict = resultJson as! [String:Any]
@@ -98,14 +99,21 @@ class JDXNetService {
                                         if resultObject.Code == "200"{
                                             //自动解析成目标数据 源
                                             if let actualData = resultObject.data as? Array<Any>{
+                                                //缓存原始数据
+                                                LHCacheManager.cacheManager.setObject(value: actualData as AnyObject, key: getCacheKey(params: params, url: url))
+
                                                 var resultArr = Array<T>()
                                                 for item in actualData {
                                                     if let ob = T.deserialize(from: item as? Dictionary){
                                                         resultArr.append(ob)
+                                                    }else{
+                                                        //转model失败 打印一下服务端返回的原始数据
+                                                        print("数据转换失败,服务端返回的数据:"+"\(item)")
                                                     }
                                                 }
                                                 finishedCallback(resultArr)
                                             }
+
                                         }else{
                                             //服务器端返回 错误
                                             failCallback()
@@ -133,10 +141,41 @@ class JDXNetService {
             if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
                 QMUITips.showError("网络未连接", in: view, hideAfterDelay: 2.0)
             }
+            //从缓存中拿数据
+            DispatchQueue.main.async {
+                if let actualData = LHCacheManager.cacheManager.object(key: getCacheKey(params: params, url: url)) as? Array<Any>{
+                    var resultArr = Array<T>()
+                    for item in actualData {
+                        if let ob = T.deserialize(from: item as? Dictionary){
+                            resultArr.append(ob)
+                        }else{
+                            //转model失败 打印一下服务端返回的原始数据
+                            print("数据转换失败,服务端返回的数据:"+"\(item)")
+                        }
+                    }
+                    finishedCallback(resultArr)
+                }
+            }
         }
     }
-    
 }
+
+
+/// 把请求的参数 和连接 拼接成缓存 对应的key
+func getCacheKey(params:[String:Any]?,url:String)->String{
+    var keyStr = ""
+    if let actualParams = params {
+        
+        for (key, value) in actualParams
+        {
+            let keyValue = "\(key) : \(value)"
+            keyStr.append(keyValue)
+        }
+    }
+    keyStr.append(url)
+    return keyStr
+}
+
 func getNetWorksStatus() -> Bool {
     switch Reachability.forInternetConnection().currentReachabilityStatus() {
     case NetworkStatus.NotReachable:

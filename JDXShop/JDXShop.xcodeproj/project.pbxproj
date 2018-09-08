@@ -58,6 +58,7 @@
 		DE9EF4992122A4D600DAFCB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE9EF4982122A4D600DAFCB1 /* Assets.xcassets */; };
 		DE9EF49C2122A4D600DAFCB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9EF49A2122A4D600DAFCB1 /* LaunchScreen.storyboard */; };
 		DEFF18F421412B3B0007FAB1 /* JDXBaseNetOperate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF18F321412B3B0007FAB1 /* JDXBaseNetOperate.swift */; };
+		DEFF18F6214371850007FAB1 /* LHCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF18F5214371850007FAB1 /* LHCacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +121,7 @@
 		DE9EF49D2122A4D600DAFCB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE9EF4A32122A8D900DAFCB1 /* JDXShop-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JDXShop-Bridging-Header.h"; sourceTree = "<group>"; };
 		DEFF18F321412B3B0007FAB1 /* JDXBaseNetOperate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDXBaseNetOperate.swift; sourceTree = "<group>"; };
+		DEFF18F5214371850007FAB1 /* LHCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		A0F5D1F2212DA9D700A9643B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				DEFF18F7214371940007FAB1 /* Cache */,
 				A0F5D1F3212DA9D700A9643B /* Category */,
 				A0F5D1F9212DA9D700A9643B /* YYFPSLabel */,
 				A0F5D1FE212DA9D700A9643B /* Constant */,
@@ -375,6 +378,14 @@
 			path = JDXShop;
 			sourceTree = "<group>";
 		};
+		DEFF18F7214371940007FAB1 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				DEFF18F5214371850007FAB1 /* LHCacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		F1C2DB8ADC7CE98799DB2007 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,12 +493,14 @@
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/QMUIKit/QMUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -495,12 +508,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QMUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -548,6 +563,7 @@
 				DE9AF8A52122B0F20062D172 /* JDXNavigationController.swift in Sources */,
 				DE8A5577212AC536004797D2 /* JDXLimitSaleView.swift in Sources */,
 				A0F5D21C212DA9D700A9643B /* JDXTableDataManager.swift in Sources */,
+				DEFF18F6214371850007FAB1 /* LHCacheManager.swift in Sources */,
 				DE8A55EA212FB0F1004797D2 /* JDXProductDetailInfo.swift in Sources */,
 				A0F5D214212DA9D700A9643B /* YYFPSLabel.m in Sources */,
 				A0F5D21E212DA9D700A9643B /* JDXBaseCollectionViewCell.swift in Sources */,
@@ -711,10 +727,7 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -736,10 +749,7 @@
 				DEVELOPMENT_TEAM = W2VWN2H4Z2;
 				INFOPLIST_FILE = JDXShop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jdxonlineshop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

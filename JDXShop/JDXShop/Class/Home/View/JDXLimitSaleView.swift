@@ -158,7 +158,9 @@ class JDXLimitItemView: JDXBaseView {
         self.titleLabel.text = data.rTitle
         self.subTitleLabel.text = data.rADEnglish
         self.productImageView.showImage(url: data.rPictureURL, placeholder: nil)
-        self.priceLabel.text = "¥"+data.rADPrice!
+        if let price = data.rADPrice{
+            self.priceLabel.text = "¥"+price
+        }
         self.productNameLabel.text = data.rADTitle
     }
 }

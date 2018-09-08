@@ -8,7 +8,7 @@
 
 import UIKit
 import HandyJSON
-class JDXHomePageProductInfo: NSObject,HandyJSON {
+class JDXHomePageProductInfo: NSObject,HandyJSON,NSCoding {
     var Num:String?
     var rADChinese:String?
     var rADEnglish:String?
@@ -24,8 +24,17 @@ class JDXHomePageProductInfo: NSObject,HandyJSON {
     var rStatu:String?
     var rTitle:String?
     var rUpTime:String?
+    
     required override init() {
         
+    }
+    //使用MJExtension 快速实现编解码 主要用于 yycahe 实现本地缓存
+    func encode(with aCoder: NSCoder) {
+        self.mj_encode(aCoder)
+    }
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.mj_decode(aDecoder)
     }
     //获取 限时特卖
     public func loadTimeLimitSaleData(complectedCallback:@escaping (_ result : Array<JDXHomePageProductInfo>) -> (),failCallback:()->()){

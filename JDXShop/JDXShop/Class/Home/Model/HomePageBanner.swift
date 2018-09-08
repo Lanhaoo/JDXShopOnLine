@@ -8,7 +8,7 @@
 
 import UIKit
 import HandyJSON
-class HomePageBanner: NSObject,HandyJSON {
+class HomePageBanner: NSObject,HandyJSON,NSCoding {
     var rNum:String?
     var rPosition:String?
     var rOrder:String?
@@ -17,6 +17,14 @@ class HomePageBanner: NSObject,HandyJSON {
     var rPictureURL:String?
     required override init() {
         
+    }
+    //使用MJExtension 快速实现编解码 主要用于 yycahe 实现本地缓存
+    func encode(with aCoder: NSCoder) {
+        self.mj_encode(aCoder)
+    }
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.mj_decode(aDecoder)
     }
     //获取广告页
     public func fetchBannerData(complectedCallback:@escaping (_ result : Array<HomePageBanner>) -> ()){

@@ -25,7 +25,9 @@ class HomePageBannerView: UICollectionReusableView {
     func setData(result:Array<HomePageBanner>){
         var banners : Array<String> = Array<String>()
         for item in result{
-            banners.append(item.rPictureURL!)
+            if let url = item.rPictureURL{
+                banners.append(url)
+            }
         }
         self.banner.imageURLStringsGroup = banners
     }

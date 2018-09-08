@@ -9,7 +9,9 @@
 import UIKit
 import Alamofire
 import Reachability
+import HandyJSON
 class JDXBaseNetOperate: NSObject {
+    
     public func createDomain()->String{
         return JDXApiDefine.domain
     }
@@ -26,11 +28,15 @@ class JDXBaseNetOperate: NSObject {
         return ["DBKey":"88cb975bfe4b850ffb759f47f3e856f2",
                 "Token":"pnj7P5AXGPDXNMBH7dGZv2EgkTgj9mX2"]
     }
-    public func startExcute(){
+    public func excute(){
         if self.createRequestUrl() == nil {
             return
         }
-        Alamofire.request(self.createDomain()+self.createRequestUrl()!, method: self.createRequestMethod(), parameters: self.createRequestParams(), encoding: JSONEncoding.default, headers: self.createHeader()).responseData { (response) in
+        Alamofire.request(self.createDomain()+self.createRequestUrl()!,
+                          method: self.createRequestMethod(),
+                          parameters: self.createRequestParams(),
+                          encoding: JSONEncoding.default,
+                          headers: self.createHeader()).responseData { (response) in
             switch response.result {
             case .success(let value):
                 do{
@@ -48,7 +54,7 @@ class JDXBaseNetOperate: NSObject {
                     }
                 }catch _ {
                     //执行到这里 是因为没有连接到服务器
-                    self.requestFail(error: nil)
+                    self.serviceLinkFail()
                 }
             case .failure( _):
                 self.requestFail(error: nil)
@@ -61,6 +67,10 @@ class JDXBaseNetOperate: NSObject {
     }
     
     public func requestFail(error:AnyObject?){
+        
+    }
+    
+    public func serviceLinkFail(){
         
     }
     
