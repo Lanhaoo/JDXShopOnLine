@@ -11,11 +11,14 @@ import Kingfisher //图片加载库
 extension UIImageView{
     public func showImage(url:String?,placeholder:String?){
         if let actualUrl = url{
-            let resource = ImageResource(downloadURL:NSURL.init(string: actualUrl)! as URL)
-            if  let actualPlaceHolder = placeholder{
-                self.kf.setImage(with:resource, placeholder:UIImage.init(named:actualPlaceHolder), options: nil, progressBlock: nil, completionHandler: nil)
-            }else{
-                self.kf.setImage(with: resource)
+            print(actualUrl)
+            if let u = NSURL.init(string: actualUrl) as URL?{
+                let resource = ImageResource(downloadURL:u)
+                if  let actualPlaceHolder = placeholder{
+                    self.kf.setImage(with:resource, placeholder:UIImage.init(named:actualPlaceHolder), options: nil, progressBlock: nil, completionHandler: nil)
+                }else{
+                    self.kf.setImage(with: resource)
+                }
             }
         }
     }

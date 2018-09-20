@@ -30,7 +30,6 @@ class HomePageBanner: NSObject,HandyJSON,NSCoding {
     public func fetchBannerData(complectedCallback:@escaping (_ result : Array<HomePageBanner>) -> ()){
         JDXNetService.requestForArrayResult(url: JDXApiDefine.recommented,
                                             params: ["sPosition":"1"],
-                                            resultModel: HomePageBanner(),
                                             finishedCallback: { (result) in
             complectedCallback(result)
         }) {

@@ -8,23 +8,16 @@
 
 import UIKit
 import HandyJSON
-class JDXBaseModel:NSObject,HandyJSON{
-    var Num:String?
-    var rADChinese:String?
-    var rADEnglish:String?
-    var rADPrice:String?
-    var rADTitle:String?
-    var rDownTime:String?
-    var rOpenKind:String?
-    var rOpenParam:String?
-    var rOrder:String?
-    var rPicture:String?
-    var rPictureURL:String?
-    var rPosition:String?
-    var rStatu:String?
-    var rTitle:String?
-    var rUpTime:String?
+class JDXBaseModel:NSObject,HandyJSON,NSCoding{
     required override init() {
         
+    }
+    //使用MJExtension 快速实现编解码 主要用于 yycahe 实现本地缓存
+    func encode(with aCoder: NSCoder) {
+        self.mj_encode(aCoder)
+    }
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+        self.mj_decode(aDecoder)
     }
 }

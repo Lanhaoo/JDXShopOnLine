@@ -22,4 +22,6 @@ class JDXApiDefine: NSObject {
     
     public static let productDetailGet = "JDXProductDetailGetO"
     
+    public static let customerASGetO = "JDXCustomerASGetO"
+    
 }

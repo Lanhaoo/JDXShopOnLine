@@ -8,75 +8,126 @@
 
 import UIKit
 import Alamofire
-import Reachability
 import HandyJSON
-class JDXBaseNetOperate: NSObject {
-    
-    public func createDomain()->String{
-        return JDXApiDefine.domain
-    }
-    public func createRequestUrl()->String?{
-        return nil
-    }
-    public func createRequestParams()->[String:Any]?{
-        return nil
-    }
-    public func createRequestMethod()->HTTPMethod{
-        return HTTPMethod.post
-    }
-    public func createHeader()->HTTPHeaders{
-        return ["DBKey":"88cb975bfe4b850ffb759f47f3e856f2",
-                "Token":"pnj7P5AXGPDXNMBH7dGZv2EgkTgj9mX2"]
-    }
-    public func excute(){
-        if self.createRequestUrl() == nil {
-            return
+protocol NetworkAPIConvertable {
+    var host:String {get}
+    var path:String {get}
+    var method:RequestMethod{get}
+    var requestEncoding:RequestEncoding{get}
+    var requestParams:[String:Any]?{get}
+}
+enum RequestEncoding{
+    case json, propertyList, url
+}
+enum RequestMethod{
+    case get, post, delete, put
+}
+private extension RequestMethod{
+    func toAlamofireMethod()->HTTPMethod{
+        switch self {
+        case .get:
+            return .get
+        case .post:
+            return .post
+        case .delete:
+            return .delete
+        case .put:
+            return .put
         }
-        Alamofire.request(self.createDomain()+self.createRequestUrl()!,
-                          method: self.createRequestMethod(),
-                          parameters: self.createRequestParams(),
-                          encoding: JSONEncoding.default,
-                          headers: self.createHeader()).responseData { (response) in
+    }
+}
+private extension RequestEncoding{
+    func toAlamofireEncoding()->ParameterEncoding{
+        switch self {
+        case .json:
+            return JSONEncoding.default
+        case .propertyList:
+            return PropertyListEncoding()
+        case .url:
+            return URLEncoding()
+        }
+    }
+}
+struct APIRouter<T:HandyJSON>{
+    
+    enum ResponseResult{
+        case succeed(value:T)
+        case error(error:Error)
+    }
+    static func request(api:NetworkAPIConvertable,completionHandler:@escaping (ResponseResult) -> Void){
+        
+        let requestPath = api.host + api.path
+        
+        Alamofire.request(requestPath,
+                          method: api.method.toAlamofireMethod(),
+                          parameters: api.requestParams,
+                          encoding: api.requestEncoding.toAlamofireEncoding(),
+                          headers: netServiceHeaders).responseData { (response) in
+                            
             switch response.result {
+                
             case .success(let value):
                 do{
                     let json = try JSONSerialization.jsonObject(with: value, options: .mutableContainers)
                     let dic = json as! [String:Any]
                     if let object = NetResponse.deserialize(from: dic){
-                        if object.Code == "200" {
-                            self.requestSuccess(result: object)
+                        if object.Code == "200"{
+                            if let actualData = object.data as? [String:Any]?{
+                                if let ob = T.deserialize(from: actualData){
+                                    completionHandler(ResponseResult.succeed(value: ob))
+                                }
+                            }
                         }else{
-//                            if let errMsg = object.Messige{
-//
-//                            }
-                            self.requestFail(error: object)
+                            if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
+                                QMUITips.showError(object.Messige ?? "暂无数据", in: view, hideAfterDelay: 2.0)
+                            }
                         }
                     }
                 }catch _ {
-                    //执行到这里 是因为没有连接到服务器
-                    self.serviceLinkFail()
+                    //执行到这里 说明服务器异常
+                    if let view = UIApplication.shared.keyWindow?.rootViewController?.view{
+                        QMUITips.showError("服务器异常", in: view, hideAfterDelay: 2.0)
+                    }
                 }
-            case .failure( _):
-                self.requestFail(error: nil)
+            case .failure(let error):
+                completionHandler(ResponseResult.error(error: error))
             }
         }
-        
     }
-    public func requestSuccess(result:AnyObject?){
-        
+}
+
+//测试用例
+enum NetworkService{
+    case JDXCustomerASGet()
+}
+extension NetworkService:NetworkAPIConvertable{
+    var host: String {
+        return JDXApiDefine.domain
     }
-    
-    public func requestFail(error:AnyObject?){
-        
+    var path: String {
+        switch self {
+        case .JDXCustomerASGet:
+            return JDXApiDefine.customerASGetO
+        }
     }
-    
-    public func serviceLinkFail(){
-        
+    var method: RequestMethod {
+        switch self {
+        case .JDXCustomerASGet:
+            return .post
+        }
     }
-    
-    public func interNetFail(){
-        
+    var requestEncoding: RequestEncoding {
+        switch self {
+        case .JDXCustomerASGet:
+            return .json
+        }
     }
-    
+    var requestParams: [String : Any]? {
+        switch self {
+        case .JDXCustomerASGet:
+            return nil
+        }
+    }
     
 }
+

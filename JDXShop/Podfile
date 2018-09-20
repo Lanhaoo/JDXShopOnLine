@@ -12,7 +12,7 @@ target 'JDXShop' do
     pod 'SDCycleScrollView'
     pod 'MJRefresh'
     pod 'SnapKit'
-    pod 'HandyJSON', '~> 4.1.1'
+    pod 'HandyJSON'
     pod 'Kingfisher'
     pod 'Reachability'
     pod 'YYCache'

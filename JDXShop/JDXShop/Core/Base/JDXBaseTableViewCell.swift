@@ -17,10 +17,7 @@ class JDXBaseTableViewCell: UITableViewCell {
         
     }
     public func setCellData(data:AnyObject?) {
-        if let actualData = data as? JDXBaseModel {
-            print(actualData.rADTitle)
-            self.textLabel?.text = actualData.rADTitle
-        }
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

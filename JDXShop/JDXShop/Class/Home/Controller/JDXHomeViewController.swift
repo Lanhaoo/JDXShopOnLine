@@ -84,6 +84,13 @@ class JDXHomeViewController: JDXBaseCollectionViewController,JDXLimitSaleViewPro
         //第四个网络请求 获取 热门分类
         queue.async(group: group) {
             let sema = DispatchSemaphore(value: 0)
+//            JDXNetService.requestForArrayResult(url: JDXApiDefine.recommendPageGet,
+//                                                params: nil,
+//                                                finishedCallback: { (r : Array<JDXHomePageProductInfo>) in
+//
+//            }) {
+//
+//            }
             self.productModel.loadClassifyData(complectedCallback: { (result) in
                 weakSelf?.kindMenuView?.setKindMenuViewData(result:result)
                 sema.signal()
